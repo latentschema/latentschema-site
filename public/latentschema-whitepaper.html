@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LatentSchema whitepaper — the foundational intelligence layer for fragmented enterprise data.">
+<title>LatentSchema — Whitepaper</title>
+<style>
+  :root{
+    --bg: #0B0F19;
+    --bg-alt: #0F1421;
+    --surface: #141a2b;
+    --ink: #f8fafc;
+    --ink-soft: #b7c0d1;
+    --ink-faint: #64748b;
+    --line: rgba(255,255,255,0.10);
+    --line-soft: rgba(255,255,255,0.06);
+    --accent: #3B82F6;       /* cobalt-bright */
+    --accent-2: #22D3EE;     /* cyan-glow */
+    --accent-soft: rgba(59,130,246,0.10);
+    --good: #34d399;
+    --good-soft: rgba(52,211,153,0.10);
+    --mono-bg: rgba(255,255,255,0.06);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 10px 30px rgba(0,0,0,0.35);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px),
+      radial-gradient(circle at 50% 0%, rgba(47,111,255,0.16), transparent 60%);
+    background-size: 48px 48px, 48px 48px, 100% 100%;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono{ font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .wrap{ max-width: 780px; margin: 0 auto; padding: 0 24px 120px; }
+
+  /* ---------- Cover ---------- */
+  header.cover{
+    max-width: 780px; margin: 0 auto; padding: 72px 24px 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin: 0 0 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow: 0 0 10px 2px rgba(59,130,246,0.6); display:inline-block; }
+  h1.title{
+    font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.12; margin: 0 0 16px;
+    text-wrap: balance; letter-spacing: -0.02em; font-weight: 800;
+  }
+  h1.title .grad{
+    background: linear-gradient(to right, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  p.subtitle{
+    font-size: 1.15rem; color: var(--ink-soft); max-width: 58ch; margin: 0 0 28px;
+    text-wrap: balance;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap: 22px;
+    font-size: 12.5px; color: var(--ink-faint);
+  }
+  .meta-row b{ color: var(--ink-soft); font-weight: 600; }
+
+  /* ---------- divider ---------- */
+  .divider{ display:flex; align-items:center; gap: 10px; margin: 56px 0 40px; }
+  .divider .line{ flex:1; height:1px; background: var(--line); }
+  .divider .diamond{ width:7px; height:7px; background: var(--accent); transform: rotate(45deg); border-radius: 1px; box-shadow: 0 0 8px 1px rgba(59,130,246,0.5); }
+
+  /* ---------- Section rhythm ---------- */
+  section{ margin: 0 0 8px; }
+  .kicker{
+    font-size: 11.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint);
+    font-weight: 700; margin: 0 0 10px;
+  }
+  h2{ font-size: 1.7rem; margin: 0 0 18px; text-wrap: balance; font-weight: 700; letter-spacing:-0.01em; color: var(--ink); }
+  h3{ font-size: 1.15rem; margin: 0 0 8px; font-weight: 700; color: var(--ink); }
+  p{ margin: 0 0 16px; max-width: 68ch; color: var(--ink-soft); }
+  p.lede{ font-size: 1.08rem; color: var(--ink-soft); max-width: 66ch; }
+  ul.plain{ margin: 0 0 16px; padding-left: 1.2em; }
+  ul.plain li{ margin-bottom: 8px; max-width: 64ch; color: var(--ink-soft); }
+  strong{ color: var(--ink); }
+  code{ font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; background: var(--mono-bg); padding: 0.1em 0.4em; border-radius: 4px; font-size: 0.88em; color: var(--ink); }
+
+  /* ---------- Differentiator rows ---------- */
+  .diff{
+    display:grid; grid-template-columns: 44px 1fr; gap: 16px;
+    padding: 22px 0; border-top: 1px solid var(--line-soft);
+  }
+  .diff:first-of-type{ border-top: none; padding-top: 8px; }
+  .diff .num{
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px; color: var(--accent); font-weight: 700; padding-top: 3px;
+  }
+  .diff h3{ margin-bottom: 6px; }
+  .diff p{ margin-bottom: 0; }
+
+  /* ---------- Spec table ---------- */
+  .spec-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow:hidden;
+    margin: 24px 0 36px;
+  }
+  .spec{ background: var(--surface); padding: 20px 22px; }
+  .spec .l{ font-size: 11px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:0.08em; font-weight: 700; margin-bottom: 6px; }
+  .spec .v{ font-size: 1.02rem; color: var(--ink); font-weight: 600; }
+  @media (max-width: 560px){ .spec-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- Comparison table ---------- */
+  .table-scroll{ overflow-x: auto; margin: 8px 0 24px; border: 1px solid var(--line); border-radius: 10px; }
+  table.compare{
+    border-collapse: collapse; width: 100%; min-width: 560px;
+    font-size: 13.5px; background: var(--surface);
+  }
+  table.compare th, table.compare td{
+    padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line-soft);
+  }
+  table.compare th{
+    font-size: 11px; letter-spacing:0.08em; text-transform: uppercase; color: var(--ink-faint);
+    font-weight: 700; background: var(--bg-alt);
+  }
+  table.compare td{ color: var(--ink-soft); }
+  table.compare td.axis{ color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.compare tr:last-child td{ border-bottom: none; }
+  table.compare td.hi{ background: var(--accent-soft); font-weight: 600; color: var(--ink); }
+  .pill{
+    display:inline-block; font-size:11px; font-weight:700; padding: 2px 8px; border-radius: 999px;
+  }
+  .pill.yes{ background: var(--good-soft); color: var(--good); }
+  .pill.no{ background: var(--line-soft); color: var(--ink-faint); }
+  .pill.part{ background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- Callout ---------- */
+  .callout{
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 18px 20px; margin: 20px 0; box-shadow: var(--shadow);
+  }
+  .callout p{ margin:0; color: var(--ink-soft); }
+  .callout p.who{ margin-top:10px; font-size:12px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; }
+
+  footer{
+    max-width: 780px; margin: 40px auto 0; padding: 28px 24px 0; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--ink-faint);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width: 560px){
+    header.cover{ padding-top: 48px; }
+    .diff{ grid-template-columns: 1fr; }
+    .diff .num{ padding-top: 0; }
+  }
+
+  /* ---------- LatentSchema wordmark ---------- */
+  .ls-logo{ display:inline-flex; align-items:center; gap: 12px; }
+  .ls-mark{ position: relative; flex-shrink:0; }
+  .ls-word{ font-weight: 800; letter-spacing: -0.02em; font-size: 20px; }
+  .ls-word .a{ color: var(--ink); }
+  .ls-word .b{ color: var(--accent); }
+  footer .ls-word{ font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="ls-logo" style="margin-bottom:32px;">
+    <svg class="ls-mark" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+      <rect x="2" y="12" width="16" height="16" rx="3" fill="rgba(148,163,184,0.35)" transform="rotate(45 10 20)"/>
+      <rect x="22" y="12" width="16" height="16" rx="3" fill="none" stroke="#3B82F6" stroke-width="1.5" transform="rotate(45 30 20)"/>
+      <circle cx="20" cy="20" r="2.6" fill="#ffffff"/>
+    </svg>
+    <span class="ls-word"><span class="a">LATENT</span><span class="b">SCHEMA</span></span>
+  </div>
+  <p class="eyebrow"><span class="dot"></span>Whitepaper · LatentSchema</p>
+  <h1 class="title">The Foundational <span class="grad">Intelligence Layer</span> for Fragmented Enterprise Data</h1>
+  <p class="subtitle">LatentSchema synthesizes disparate, legacy datasets into low-compute, domain-specific machine intelligence. We eliminate complex database migrations to deliver autonomous business intelligence at scale.</p>
+  <div class="meta-row">
+    <span><b>Product</b> LatentSchema Core Engine</span>
+    <span><b>Prepared</b> July 2026</span>
+    <span><b>Audience</b> Engineering leaders, investors, data partners</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Executive Summary</p>
+  <h2>Fragmentation is the default state of enterprise data</h2>
+  <p class="lede">Every operating business accumulates the same problem: transactional truth scattered across a POS system, an accounting ledger, a spreadsheet, a supplier portal, and a handful of tools that were never designed to talk to each other. The conventional fix — a data warehouse, a schema migration, a team of analytics engineers — is slow, expensive, and often abandoned halfway through.</p>
+  <p>LatentSchema takes a different position: instead of forcing fragmented, legacy datasets into a unified schema before any intelligence can be extracted, we train small, domain-specific models that read the data where it already lives. The result is autonomous business intelligence that arrives in weeks, runs on modest compute, and never requires the underlying systems of record to change.</p>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Architecture</p>
+  <h2>Moving Past API Wrappers</h2>
+  <p>While others build fragile prompt wrappers around generic models, LatentSchema is training custom, low-compute sub-3B parameter Small Language Models (SLMs). By engineering proprietary tokenization spaces for unstructured transactional metrics, we deliver localized data privacy, ultra-low latency, and mathematically predictable operational insights.</p>
+
+  <div class="spec-grid">
+    <div class="spec"><div class="l">Model class</div><div class="v">Sub-3B parameter SLMs</div></div>
+    <div class="spec"><div class="l">Tokenization</div><div class="v">Proprietary, transaction-native</div></div>
+    <div class="spec"><div class="l">Data locality</div><div class="v">On-prem / VPC deployable</div></div>
+    <div class="spec"><div class="l">Inference profile</div><div class="v">Ultra-low latency, low compute</div></div>
+  </div>
+
+  <p>A generic frontier model, prompted at inference time, has no fixed vocabulary for a purchase order line, a recipe yield, or a chart-of-accounts code — every token it spends is general-purpose. A model trained on a proprietary, transaction-native tokenization space spends none of that budget on generality: it reads domain data more densely, at a fraction of the parameter count, with outputs that are consistent enough to build automated decisions on top of.</p>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Why Not Just Prompt a Bigger Model</p>
+  <h2>Three properties a wrapper can't buy</h2>
+
+  <div class="diff">
+    <div class="num">01</div>
+    <div>
+      <h3>Data privacy by architecture, not by contract</h3>
+      <p>Sub-3B models are small enough to deploy on-prem or inside a customer's own VPC. Sensitive transactional data — supplier pricing, payroll, margin data — never has to leave the customer's boundary to be understood, removing an entire category of vendor risk that API-based wrappers can only paper over with a data processing agreement.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">02</div>
+    <div>
+      <h3>Latency low enough to sit in the operational loop</h3>
+      <p>A model an order of magnitude smaller than a general frontier model returns an answer fast enough to sit inside a live workflow — flagging an anomalous invoice as it's ingested, not in a nightly batch report reviewed the next morning.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">03</div>
+    <div>
+      <h3>Outputs predictable enough to automate against</h3>
+      <p>A domain-constrained tokenization space narrows the model's output distribution to the vocabulary of the problem it was trained on. That narrower distribution is what makes it safe to wire the model's output directly into a downstream action — a reorder, an alert, a reconciled ledger entry — rather than routing every response through a human review step.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Positioning</p>
+  <h2>A different point on the map</h2>
+  <p class="lede">Not a thinner version of a general-purpose LLM product — a different architectural bet entirely.</p>
+
+  <div class="table-scroll">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Generic LLM + prompt wrapper</th>
+          <th>LatentSchema SLM</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="axis">Parameter count</td>
+          <td><span class="pill no">10B&ndash;1T+</span></td>
+          <td class="hi"><span class="pill yes">Sub-3B</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Data residency</td>
+          <td><span class="pill part">Vendor cloud, by contract</span></td>
+          <td class="hi"><span class="pill yes">On-prem / VPC, by design</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Inference cost profile</td>
+          <td><span class="pill no">High, per-token metered</span></td>
+          <td class="hi"><span class="pill yes">Low, fixed-footprint</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Migration required first</td>
+          <td><span class="pill part">Often, to a warehouse/schema</span></td>
+          <td class="hi"><span class="pill yes">None</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Output consistency</td>
+          <td><span class="pill no">Prompt-dependent</span></td>
+          <td class="hi"><span class="pill yes">Domain-constrained</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--ink-faint)">Category comparison based on the general architecture of prompt-based LLM integrations versus a purpose-trained small language model; not a claim about any specific vendor's current product.</p>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Eliminating the Migration Tax</p>
+  <h2>Intelligence without re-platforming</h2>
+  <p>The standard path to "data-driven" starts with a migration: normalize every source system into a common schema, stand up a warehouse, build the pipelines, then finally start modeling. For a business running lean, that project routinely outlives the problem it was meant to solve.</p>
+  <p>LatentSchema's engine is built to read fragmented, legacy datasets directly — the export from a POS system, a CSV from an accounting tool, a supplier's invoice format — without first collapsing them into one canonical schema. The model does the work of reconciling meaning across sources, which is where a schema migration project spends most of its budget in the first place.</p>
+  <div class="callout">
+    <p>The database migration isn't a prerequisite for intelligence. It's a workaround for models too general to read the data as it already exists.</p>
+  </div>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Proof Point</p>
+  <h2>fnbPulse 360 — the engine in production</h2>
+  <p>LatentSchema's first commercial deployment is fnbPulse 360, an autonomous business intelligence product for multi-unit hospitality operators. It reconciles data between Clover POS systems and Xero accounting records automatically, then runs an AI Margin Advisor on top to surface ingredient cost anomalies, supplier price spikes, and labor variance — with a daily Pulse Score summarizing overall operational health.</p>
+  <p>Every one of those capabilities is downstream of the same core engine described in this document: fragmented source data in, structured operational intelligence out, without a migration in between.</p>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Status</p>
+  <h2>Where LatentSchema is today</h2>
+  <p>LatentSchema is currently in alpha, engineering the core tokenization and model training pipeline alongside its first production deployment in the hospitality vertical. We are onboarding a limited set of design partners who have the kind of fragmented, legacy transactional data this engine was built to read.</p>
+</section>
+
+</div>
+
+<footer>
+  <div class="ls-logo">
+    <svg class="ls-mark" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true">
+      <rect x="2" y="12" width="16" height="16" rx="3" fill="rgba(148,163,184,0.35)" transform="rotate(45 10 20)"/>
+      <rect x="22" y="12" width="16" height="16" rx="3" fill="none" stroke="#3B82F6" stroke-width="1.5" transform="rotate(45 30 20)"/>
+      <circle cx="20" cy="20" r="2.6" fill="#ffffff"/>
+    </svg>
+    <span class="ls-word"><span class="a">LATENT</span><span class="b">SCHEMA</span></span>
+  </div>
+  <span>July 2026</span>
+</footer>
+
+</body>
+</html>

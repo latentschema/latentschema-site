@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="fnbPulse 360 whitepaper — one system of record for multi-unit restaurant operations, built on the LatentSchema engine.">
+<title>fnbPulse 360 — Whitepaper</title>
+<style>
+  :root{
+    --bg: #0B0F19;
+    --bg-alt: #0F1421;
+    --surface: #141a2b;
+    --ink: #f8fafc;
+    --ink-soft: #b7c0d1;
+    --ink-faint: #64748b;
+    --line: rgba(255,255,255,0.10);
+    --line-soft: rgba(255,255,255,0.06);
+    --accent: #3B82F6;       /* cobalt-bright */
+    --accent-2: #22D3EE;     /* cyan-glow */
+    --accent-soft: rgba(59,130,246,0.10);
+    --good: #34d399;
+    --good-soft: rgba(52,211,153,0.10);
+    --mono-bg: rgba(255,255,255,0.06);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 10px 30px rgba(0,0,0,0.35);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px),
+      radial-gradient(circle at 50% 0%, rgba(47,111,255,0.16), transparent 60%);
+    background-size: 48px 48px, 48px 48px, 100% 100%;
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono{ font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .wrap{ max-width: 780px; margin: 0 auto; padding: 0 24px 120px; }
+
+  /* ---------- Cover ---------- */
+  header.cover{
+    max-width: 780px; margin: 0 auto; padding: 72px 24px 40px;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 700; margin: 0 0 18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow .dot{ width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow: 0 0 10px 2px rgba(59,130,246,0.6); display:inline-block; }
+  h1.title{
+    font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.12; margin: 0 0 16px;
+    text-wrap: balance; letter-spacing: -0.02em; font-weight: 800;
+  }
+  h1.title .grad{
+    background: linear-gradient(to right, var(--accent), var(--accent-2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  p.subtitle{
+    font-size: 1.15rem; color: var(--ink-soft); max-width: 58ch; margin: 0 0 28px;
+    text-wrap: balance;
+  }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap: 22px;
+    font-size: 12.5px; color: var(--ink-faint);
+  }
+  .meta-row b{ color: var(--ink-soft); font-weight: 600; }
+
+  /* ---------- divider ---------- */
+  .divider{ display:flex; align-items:center; gap: 10px; margin: 56px 0 40px; }
+  .divider .line{ flex:1; height:1px; background: var(--line); }
+  .divider .diamond{ width:7px; height:7px; background: var(--accent); transform: rotate(45deg); border-radius: 1px; box-shadow: 0 0 8px 1px rgba(59,130,246,0.5); }
+
+  /* ---------- Section rhythm ---------- */
+  section{ margin: 0 0 8px; }
+  .kicker{
+    font-size: 11.5px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint);
+    font-weight: 700; margin: 0 0 10px;
+  }
+  h2{ font-size: 1.7rem; margin: 0 0 18px; text-wrap: balance; font-weight: 700; letter-spacing:-0.01em; color: var(--ink); }
+  h3{ font-size: 1.15rem; margin: 0 0 8px; font-weight: 700; color: var(--ink); }
+  p{ margin: 0 0 16px; max-width: 68ch; color: var(--ink-soft); }
+  p.lede{ font-size: 1.08rem; color: var(--ink-soft); max-width: 66ch; }
+  ul.plain{ margin: 0 0 16px; padding-left: 1.2em; }
+  ul.plain li{ margin-bottom: 8px; max-width: 64ch; color: var(--ink-soft); }
+  strong{ color: var(--ink); }
+  code{ font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; background: var(--mono-bg); padding: 0.1em 0.4em; border-radius: 4px; font-size: 0.88em; color: var(--ink); }
+
+  /* ---------- Differentiator rows ---------- */
+  .diff{
+    display:grid; grid-template-columns: 44px 1fr; gap: 16px;
+    padding: 22px 0; border-top: 1px solid var(--line-soft);
+  }
+  .diff:first-of-type{ border-top: none; padding-top: 8px; }
+  .diff .num{
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px; color: var(--accent); font-weight: 700; padding-top: 3px;
+  }
+  .diff h3{ margin-bottom: 6px; }
+  .diff p{ margin-bottom: 8px; }
+  .diff .proof{
+    font-size: 13px; color: var(--ink-faint);
+    border-left: 2px solid var(--accent-soft); padding-left: 10px; margin-top: 10px;
+  }
+  .diff .proof b{ color: var(--ink-soft); }
+
+  /* ---------- Comparison table ---------- */
+  .table-scroll{ overflow-x: auto; margin: 8px 0 24px; border: 1px solid var(--line); border-radius: 10px; }
+  table.compare{
+    border-collapse: collapse; width: 100%; min-width: 620px;
+    font-size: 13.5px; background: var(--surface);
+  }
+  table.compare th, table.compare td{
+    padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line-soft);
+  }
+  table.compare th{
+    font-size: 11px; letter-spacing:0.08em; text-transform: uppercase; color: var(--ink-faint);
+    font-weight: 700; background: var(--bg-alt);
+  }
+  table.compare td{ color: var(--ink-soft); }
+  table.compare td.axis{ color: var(--ink); font-weight: 600; white-space: nowrap; }
+  table.compare tr:last-child td{ border-bottom: none; }
+  table.compare td.hi{ background: var(--accent-soft); font-weight: 600; color: var(--ink); }
+  .pill{
+    display:inline-block; font-size:11px; font-weight:700; padding: 2px 8px; border-radius: 999px;
+  }
+  .pill.yes{ background: var(--good-soft); color: var(--good); }
+  .pill.no{ background: var(--line-soft); color: var(--ink-faint); }
+  .pill.part{ background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- Stat strip ---------- */
+  .stats{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow:hidden; margin: 24px 0 36px; }
+  .stat{ background: var(--surface); padding: 18px 14px; text-align:center; }
+  .stat .n{ font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 1.6rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .stat .l{ font-size: 11px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; }
+  @media (max-width: 560px){ .stats{ grid-template-columns: repeat(2,1fr); } }
+
+  /* ---------- Callout ---------- */
+  .callout{
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 18px 20px; margin: 20px 0; box-shadow: var(--shadow);
+  }
+  .callout p{ margin:0; color: var(--ink-soft); }
+  .callout p.who{ margin-top:10px; font-size:12px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; }
+
+  footer{
+    max-width: 780px; margin: 40px auto 0; padding: 28px 24px 0; border-top: 1px solid var(--line);
+    font-size: 12.5px; color: var(--ink-faint);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width: 560px){
+    header.cover{ padding-top: 48px; }
+    .diff{ grid-template-columns: 1fr; }
+    .diff .num{ padding-top: 0; }
+  }
+
+  /* ---------- fnbPulse360 wordmark (faithful to frontend/src/components/FnbPulseLogo.jsx) ---------- */
+  /* The 360 ring is absolutely-positioned and centered on the "360" text, so its
+     78px/44px diameter extends well past the wordmark's own flow box (mostly to
+     the left and above/below) — padding here has to clear that overflow, not
+     just wrap the text, or the ring spills past the badge's rounded edge. */
+  .fnb-logo-badge{
+    display: inline-flex; align-items: center;
+  }
+  .fnb-logo-container{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    user-select: none;
+  }
+  .fnb-text{
+    font-size: 27px; letter-spacing: -0.3px; color: #ffffff;
+    display: flex; align-items: baseline;
+  }
+  .fnb-text .brand-fnb{ font-style: italic; font-weight: 400; color: #ffffff; margin-right: 3px; }
+  .fnb-text .brand-pulse{ font-weight: 800; color: #00E676; }
+  .fnb-text .brand-360-wrap{ position: relative; display: inline-flex; align-items: center; margin-left: 2px; }
+  .fnb-text .brand-360-ring{
+    position: absolute; top: 50%; left: 50%; width: 78px; height: 78px;
+    transform: translate(-50%, -50%); pointer-events: none; overflow: visible;
+  }
+  .fnb-text .brand-360{ font-weight: 400; color: #ffffff; position: relative; z-index: 1; padding: 0 6px; }
+  footer .fnb-text{ font-size: 15px; }
+  footer .fnb-text .brand-360-ring{ width: 44px; height: 44px; }
+
+  /* ---------- LatentSchema byline mark (parent engine) ---------- */
+  .ls-byline{ display:inline-flex; align-items:center; gap: 8px; }
+  .ls-mark{ flex-shrink:0; }
+  .ls-word{ font-weight: 800; letter-spacing: -0.02em; }
+  .ls-word .a{ color: var(--ink); }
+  .ls-word .b{ color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="fnb-logo-badge" style="margin-bottom:28px;">
+    <div class="fnb-logo-container">
+      <div class="fnb-text">
+        <span class="brand-fnb">fnb</span><span class="brand-pulse">Pulse</span>
+        <span class="brand-360-wrap">
+          <svg class="brand-360-ring" viewBox="0 0 50 50">
+            <path d="M 5.95 14 A 22 22 0 0 1 47 25" fill="none" stroke="#00E676" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 47 25 A 22 22 0 0 1 5.95 36" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="2.95,30.8 8.55,34.5 3.35,37.5" fill="#ffffff"/>
+          </svg>
+          <span class="brand-360">360</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <p class="eyebrow"><span class="dot"></span>Whitepaper · fnbPulse 360</p>
+  <h1 class="title">One system of <span class="grad">record</span> for multi-unit restaurant operations</h1>
+  <p class="subtitle">Why the 2–20 branch restaurant group is stuck choosing between a stitched-together stack of point tools and an enterprise ERP built for chains ten times their size — and what we built as the alternative.</p>
+  <div class="meta-row">
+    <span><b>Product</b> fnbPulse 360</span>
+    <span><b>Prepared</b> July 2026</span>
+    <span><b>Audience</b> Operators, investors, engineering partners</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Executive Summary</p>
+  <h2>The gap isn't features. It's who the features are for.</h2>
+  <p class="lede">Restaurant back-office software has never been short on tools. What's missing is one built for the segment that has the most operators in it and the least software attention: independent groups running two to twenty branches, who have outgrown a spreadsheet but will never be Restaurant365's or Toast Enterprise's ideal customer.</p>
+  <p>fnbPulse 360 is a single, multi-tenant operating system for that group — sales, inventory, recipe and sub-recipe costing, supplier invoicing, procurement, and labor, all reading from one costing engine and one stock ledger, with an AI layer that does the data entry and the daily reading of the numbers that a busy owner-operator doesn't have time for.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">15</div><div class="l">Backend modules</div></div>
+    <div class="stat"><div class="n">27</div><div class="l">Schema migrations</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">OCR/AI providers chained</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">Costing engine, everywhere</div></div>
+  </div>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">The Market Today</p>
+  <h2>Four ways operators currently solve this — and where each breaks</h2>
+  <p>Talk to a restaurant group running more than one location and the back office almost always looks like one of these, or some combination:</p>
+  <ul class="plain">
+    <li><strong>Spreadsheets and a shoebox of invoices.</strong> Free, flexible, and the default for most independents — until recipe costs live in one file, inventory counts in another, and nobody trusts either after the third branch opens.</li>
+    <li><strong>The POS vendor's bolt-on inventory module</strong> (Toast, Square, and similar). Ties you to that POS's hardware and pricing, and the costing logic is typically flat ingredient math with no real handling of sub-recipes, batch prep, or supplier-level procurement signal.</li>
+    <li><strong>Standalone invoice/AP-automation tools.</strong> Solve OCR and bill-paying in isolation, but the extracted data doesn't know what a "dish" or a "recipe" is — it stops at the invoice, leaving costing as someone's separate manual job.</li>
+    <li><strong>Enterprise back-office ERPs</strong> (Restaurant365, Apicbase, and similar). Genuinely comprehensive — and built, priced, and implemented for chains with dedicated IT and controllers, with onboarding measured in months, not an afternoon.</li>
+  </ul>
+  <div class="callout">
+    <p>The pattern across all four: the moment a group has more than one location, they either pay enterprise money for enterprise complexity, or keep stitching point tools together and eating the reconciliation cost themselves.</p>
+    <p class="who">The gap fnbPulse 360 is built for</p>
+  </div>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">What We Built Differently</p>
+  <h2>Eight decisions that show up in the product, not just the pitch</h2>
+
+  <div class="diff">
+    <div class="num">01</div>
+    <div>
+      <h3>Sub-recipes cost correctly, not approximately</h3>
+      <p>Most costing tools flatten every recipe to raw ingredients. fnbPulse's <strong>Prep Items</strong> let a kitchen cost a house sauce, dough, or stock once — from its own ingredient lines and a batch yield — and then use it in any dish exactly like a raw ingredient, including its own recipe-unit conversion (track yield in kilograms, enter recipe quantities in grams) so kitchen staff enter numbers in the units they actually think in.</p>
+      <p class="proof">Cost changes cascade automatically: reprice one raw ingredient and every Prep Item built from it, and every dish built from that Prep Item, recosts without anyone touching a second screen.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">02</div>
+    <div>
+      <h3>OCR that degrades gracefully instead of failing hard</h3>
+      <p>Invoice scanning runs a chained fallback — Document AI, then Gemini vision, then a Hugging Face vision model — advancing only when a provider is genuinely unavailable, never silently retrying on a bad read. A local model (Ollama) is available for operators who want it, but deliberately excluded from the automatic chain so a slow local inference never masquerades as a hang.</p>
+      <p class="proof">One vendor going down doesn't take invoice processing down with it — a real resilience property most single-provider OCR tools don't have.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">03</div>
+    <div>
+      <h3>An AI Operations Advisor that reads the numbers for you</h3>
+      <p>Instead of another dashboard to interpret, the system generates a daily, plain-language briefing — 3 to 5 findings, each tagged Critical, Watch, or Opportunity, each with a dollar-impact estimate — cached once a day so it's a habit to check, not a bill to run.</p>
+      <p class="proof">Built on the same underlying signals (Pulse Score, Menu Matrix, Supplier Spend) already computed server-side — the Advisor narrates data the system already trusts, rather than a separate black box.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">04</div>
+    <div>
+      <h3>A cost simulator, before the price hike hits</h3>
+      <p>Model a hypothetical ingredient price change and immediately see which active dishes are affected and which newly cross the food-cost target — before a supplier's increase actually lands on an invoice. The same costing math used everywhere else runs against hypothetical prices, including full cascade through Prep Items.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">05</div>
+    <div>
+      <h3>Supplier scorecards, not just a price list</h3>
+      <p>Beyond "who's cheapest," the system tracks delivery cadence (is this supplier's next delivery overdue against their own history?) and price volatility (is this ingredient's price from this supplier swinging more than it should) — the two signals that actually predict a supplier relationship going bad before the invoice does.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">06</div>
+    <div>
+      <h3>Purchase orders draft themselves</h3>
+      <p>When an ingredient drops to its reorder level, a draft purchase order sizes itself against the branch's par level, groups by each ingredient's cheapest known supplier, and waits for a human to review and send — closing the gap between "low stock warning" and "order placed" without removing the person from the loop.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">07</div>
+    <div>
+      <h3>Onboarding measured in minutes, not weeks</h3>
+      <p>Photograph a paper menu and the system drafts dish names, prices, and likely recipes into an editable template — the single biggest barrier to adopting any costing system (typing in every dish and recipe by hand) collapsed into a review-and-confirm step.</p>
+    </div>
+  </div>
+
+  <div class="diff">
+    <div class="num">08</div>
+    <div>
+      <h3>Multi-branch from the first line of schema, not bolted on later</h3>
+      <p>Every tenant-owned table carries its tenant scope natively; branches roll up to one company-level view or split out individually with the same selector used across every screen. Adding a fourth, fifth, or tenth branch is a form, not a migration.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Positioning</p>
+  <h2>Built for the middle, by design</h2>
+  <p class="lede">Not a leaner enterprise ERP, and not a POS add-on with a costing screen bolted on — a different point on the map entirely.</p>
+
+  <div class="table-scroll">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Spreadsheets / manual</th>
+          <th>POS-native module</th>
+          <th>Enterprise ERP</th>
+          <th>fnbPulse 360</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="axis">Sub-recipe / batch costing</td>
+          <td><span class="pill part">Manual</span></td>
+          <td><span class="pill no">Rare</span></td>
+          <td><span class="pill yes">Yes</span></td>
+          <td class="hi"><span class="pill yes">Yes</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Onboarding time</td>
+          <td><span class="pill part">Ongoing effort</span></td>
+          <td><span class="pill part">Days</span></td>
+          <td><span class="pill no">Weeks–months</span></td>
+          <td class="hi"><span class="pill yes">Minutes–hours</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Vendor / POS lock-in</td>
+          <td><span class="pill yes">None</span></td>
+          <td><span class="pill no">High</span></td>
+          <td><span class="pill part">Medium</span></td>
+          <td class="hi"><span class="pill yes">None</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Multi-branch roll-up</td>
+          <td><span class="pill no">DIY</span></td>
+          <td><span class="pill part">Partial</span></td>
+          <td><span class="pill yes">Yes</span></td>
+          <td class="hi"><span class="pill yes">Yes</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Proactive AI advisory</td>
+          <td><span class="pill no">No</span></td>
+          <td><span class="pill no">No</span></td>
+          <td><span class="pill part">Emerging</span></td>
+          <td class="hi"><span class="pill yes">Daily, built-in</span></td>
+        </tr>
+        <tr>
+          <td class="axis">Sized/priced for 2–20 branches</td>
+          <td><span class="pill yes">Yes</span></td>
+          <td><span class="pill part">Sometimes</span></td>
+          <td><span class="pill no">Rarely</span></td>
+          <td class="hi"><span class="pill yes">Yes</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:13px;color:var(--ink-faint)">Category comparison based on the general market structure of restaurant back-office software; not a claim about any specific competitor's current feature set or pricing.</p>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Engineering Foundation</p>
+  <h2>The parts that don't show up on a screenshot</h2>
+  <p>The differentiators above are only real if the plumbing underneath them holds up under actual restaurant operations — multiple branches, live inventory, and money moving through invoices every day. Three decisions carry that weight:</p>
+  <ul class="plain">
+    <li><strong>One costing engine, everywhere.</strong> Dish cost, Prep Item cost, and the cost simulator all resolve through a single server-side module — not three copies of the same formula quietly drifting apart, which is exactly how homegrown spreadsheet systems lose everyone's trust.</li>
+    <li><strong>An immutable stock ledger.</strong> Inventory is never overwritten in place; every sale, purchase, and correction is an append-only ledger row, with current stock as a derived, always-reconstructable view — so "why is this number wrong" always has an answer.</li>
+    <li><strong>Graceful degradation as a house rule, not an exception.</strong> Every AI-dependent feature — OCR, the Advisor — falls back through alternative providers and degrades to a manual path rather than blocking the operator's day when one dependency has a bad afternoon.</li>
+  </ul>
+</section>
+
+<div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+<section>
+  <p class="kicker">Where This Goes Next</p>
+  <h2>Built, in progress, and deliberately not yet started</h2>
+  <p>In the interest of an honest whitepaper rather than a roadmap slide: usage-based billing, subdomain-per-tenant routing, and automated CI test runs are explicitly not built yet — tracked openly rather than glossed over. What's shipped and in daily use today is everything described above: multi-tenant sales, inventory, recipe/sub-recipe costing, invoicing with AI OCR, procurement, supplier intelligence, and the AI Advisor, running across Postgres with a fully migration-managed schema.</p>
+  <div class="callout">
+    <p>The thesis isn't "more features than the incumbents." It's that a 3-branch group and a 15-branch group both deserve a system that costs a batch of sauce correctly, reads their own numbers back to them every morning, and doesn't take a consultant to set up.</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="fnb-logo-badge">
+    <div class="fnb-logo-container">
+      <div class="fnb-text">
+        <span class="brand-fnb">fnb</span><span class="brand-pulse">Pulse</span>
+        <span class="brand-360-wrap">
+          <svg class="brand-360-ring" viewBox="0 0 50 50">
+            <path d="M 5.95 14 A 22 22 0 0 1 47 25" fill="none" stroke="#00E676" stroke-width="3" stroke-linecap="round"/>
+            <path d="M 47 25 A 22 22 0 0 1 5.95 36" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+            <polygon points="2.95,30.8 8.55,34.5 3.35,37.5" fill="#ffffff"/>
+          </svg>
+          <span class="brand-360">360</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <span>July 2026</span>
+</footer>
+
+</body>
+</html>
