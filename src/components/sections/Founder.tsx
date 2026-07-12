@@ -60,7 +60,6 @@ export default function Founder() {
         </div>
       </div>
 
-      <ScrollCue to="#architecture" direction="up" />
       <ScrollCue to="#waitlist" />
     </section>
   )

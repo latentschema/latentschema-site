@@ -16,7 +16,7 @@ export default function Architecture() {
       <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-cobalt-bright/30 bg-cobalt-bright/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
-            Deep-Tech Architecture
+            Deep-Tech &middot; Small Language Models
           </span>
           <h2 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
             Moving Past <span className="text-gradient-cobalt">API Wrappers</span>
@@ -46,7 +46,6 @@ export default function Architecture() {
         </div>
       </div>
 
-      <ScrollCue to="#fnbpulse" direction="up" />
       <ScrollCue to="#team" />
     </section>
   )

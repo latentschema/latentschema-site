@@ -17,7 +17,7 @@ export default function Logo({ markSize = 36, showTagline = false, wordmarkClass
         </span>
         {showTagline && (
           <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-300 sm:block">
-            Autonomous Insights from Fragmented Data
+            Uncovering Intelligence. Driving Action.
           </span>
         )}
       </div>

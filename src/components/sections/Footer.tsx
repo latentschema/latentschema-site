@@ -1,17 +1,53 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Button from '../ui/Button'
-import ScrollCue from '../ui/ScrollCue'
 
 const inputStyles =
   'w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition-colors focus:border-cobalt-bright/60 focus:outline-none focus:ring-2 focus:ring-cobalt-bright/20'
 
+const countryCodes = [
+  { code: '+1', country: 'United States', flag: '🇺🇸' },
+  { code: '+1', country: 'Canada', flag: '🇨🇦' },
+  { code: '+44', country: 'United Kingdom', flag: '🇬🇧' },
+  { code: '+91', country: 'India', flag: '🇮🇳' },
+  { code: '+61', country: 'Australia', flag: '🇦🇺' },
+  { code: '+49', country: 'Germany', flag: '🇩🇪' },
+  { code: '+33', country: 'France', flag: '🇫🇷' },
+  { code: '+81', country: 'Japan', flag: '🇯🇵' },
+  { code: '+86', country: 'China', flag: '🇨🇳' },
+  { code: '+65', country: 'Singapore', flag: '🇸🇬' },
+  { code: '+971', country: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: '+27', country: 'South Africa', flag: '🇿🇦' },
+  { code: '+55', country: 'Brazil', flag: '🇧🇷' },
+  { code: '+52', country: 'Mexico', flag: '🇲🇽' },
+  { code: '+82', country: 'South Korea', flag: '🇰🇷' },
+  { code: '+31', country: 'Netherlands', flag: '🇳🇱' },
+]
+
 export default function Footer() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(false)
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setSubmitted(true)
+    setSubmitting(true)
+    setError(false)
+
+    const form = event.currentTarget
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/contact@latentschema.com', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: new FormData(form),
+      })
+      if (!response.ok) throw new Error('Submission failed')
+      setSubmitted(true)
+    } catch {
+      setError(true)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -19,7 +55,6 @@ export default function Footer() {
       id="waitlist"
       className="relative scroll-mt-[var(--header-h,88px)] border-t border-white/10 bg-base-900/60 px-6 py-24 lg:px-8"
     >
-      <ScrollCue to="#team" direction="up" />
       <div className="mx-auto max-w-xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-cobalt-bright/30 bg-cobalt-bright/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
           Contact Us
@@ -38,6 +73,9 @@ export default function Footer() {
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-4 text-left">
+            <input type="hidden" name="_subject" value="New LatentSchema contact form submission" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
             <div>
               <label htmlFor="name" className="sr-only">
                 Name
@@ -77,9 +115,48 @@ export default function Footer() {
                 className={inputStyles}
               />
             </div>
-            <Button type="submit" variant="primary" className="mt-2 w-full">
-              Let's Collaborate
+            <div className="flex gap-2">
+              <label htmlFor="phoneCountryCode" className="sr-only">
+                Country Code
+              </label>
+              <select
+                id="phoneCountryCode"
+                name="phoneCountryCode"
+                defaultValue=""
+                className={`${inputStyles} w-40 shrink-0 appearance-none`}
+              >
+                <option value="" disabled className="bg-base-900 text-slate-500">
+                  Country Code
+                </option>
+                {countryCodes.map(({ code, country, flag }) => (
+                  <option key={country} value={code} className="bg-base-900 text-slate-100">
+                    {flag} {country} ({code})
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="phone" className="sr-only">
+                Phone Number
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone Number (optional)"
+                className={inputStyles}
+              />
+            </div>
+            <Button type="submit" variant="primary" className="mt-2 w-full" disabled={submitting}>
+              {submitting ? 'Sending…' : "Let's Collaborate"}
             </Button>
+            {error && (
+              <p className="text-sm text-red-400">
+                Something went wrong. Please try again or email us directly at{' '}
+                <a href="mailto:contact@latentschema.com" className="underline">
+                  contact@latentschema.com
+                </a>
+                .
+              </p>
+            )}
           </form>
         )}
 

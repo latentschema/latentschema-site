@@ -23,7 +23,7 @@ export default function Hero() {
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-cobalt-bright/30 bg-cobalt-bright/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
-          Deep-Tech &middot; Small Language Models
+          Autonomous Insights from Fragmented Data
         </span>
 
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">

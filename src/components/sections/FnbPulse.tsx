@@ -126,7 +126,6 @@ export default function FnbPulse() {
         </div>
       </div>
 
-      <ScrollCue to="#top" direction="up" />
       <ScrollCue to="#architecture" />
     </section>
   )
