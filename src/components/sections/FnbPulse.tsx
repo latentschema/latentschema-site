@@ -100,7 +100,7 @@ export default function FnbPulse() {
             </a>
 
             <a
-              href="/fnbpulse-whitepaper.html"
+              href={`${import.meta.env.BASE_URL}fnbpulse-whitepaper.html`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold tracking-tight text-slate-100 transition-all duration-200 hover:border-cobalt-bright/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950"

@@ -16,7 +16,7 @@ export default function Founder() {
 
         <div className="panel mt-12 flex flex-col items-center gap-6 rounded-2xl p-10 text-center sm:p-12">
           <img
-            src="/images/nandu-mahajan.jpg"
+            src={`${import.meta.env.BASE_URL}images/nandu-mahajan.jpg`}
             alt="Nandu Mahajan"
             className="h-24 w-24 shrink-0 rounded-full border border-cobalt-bright/30 object-cover shadow-glow-cobalt"
           />

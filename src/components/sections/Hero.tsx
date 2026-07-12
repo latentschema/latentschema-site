@@ -44,7 +44,11 @@ export default function Hero() {
               Contact Us
             </Button>
           </a>
-          <a href="/latentschema-whitepaper.html" target="_blank" rel="noopener noreferrer">
+          <a
+            href={`${import.meta.env.BASE_URL}latentschema-whitepaper.html`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button variant="secondary" className="w-full sm:w-auto">
               Read Technical Whitepaper
             </Button>
