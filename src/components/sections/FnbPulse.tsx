@@ -75,10 +75,14 @@ export default function FnbPulse() {
             href="https://www.fnbpulse.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="my-4 transition-opacity hover:opacity-80"
+            className="mt-4 transition-opacity hover:opacity-80"
           >
             <FnbPulseLogo scale={1.6} />
           </a>
+
+          <span className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#00E676]">
+            Insights. Operations. Growth.
+          </span>
 
           <h2 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
             Autonomous Business{' '}
