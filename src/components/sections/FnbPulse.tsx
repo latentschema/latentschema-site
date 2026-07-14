@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import Button from '../ui/Button'
 import FnbPulseLogo from '../ui/FnbPulseLogo'
+import Modal from '../ui/Modal'
 import ScrollCue from '../ui/ScrollCue'
 import FeatureCard from './FeatureCard'
+import FnbPulseExplainer from './FnbPulseExplainer'
 
 const FEATURES = [
   {
@@ -55,6 +58,8 @@ const FEATURES = [
 ]
 
 export default function FnbPulse() {
+  const [videoOpen, setVideoOpen] = useState(false)
+
   return (
     <section
       id="fnbpulse"
@@ -98,10 +103,21 @@ export default function FnbPulse() {
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row">
             <a href="https://www.fnbpulse.com" target="_blank" rel="noopener noreferrer">
-              <Button variant="primary" className="w-full sm:w-auto">
+              <Button variant="secondary" className="w-full sm:w-auto">
                 Request Demo
               </Button>
             </a>
+
+            <button
+              type="button"
+              onClick={() => setVideoOpen(true)}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#00E676]/60 bg-[#00E676] px-6 py-3 text-sm font-semibold tracking-tight text-base-950 shadow-[0_0_24px_rgba(0,230,118,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E676]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950"
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                <path d="M8 5v14l11-7z" fill="currentColor" />
+              </svg>
+              See fnbPulse in 90 Seconds
+            </button>
 
             <a
               href={`${import.meta.env.BASE_URL}fnbpulse-whitepaper.html`}
@@ -129,6 +145,10 @@ export default function FnbPulse() {
           ))}
         </div>
       </div>
+
+      <Modal open={videoOpen} onClose={() => setVideoOpen(false)}>
+        <FnbPulseExplainer />
+      </Modal>
 
       <ScrollCue to="#architecture" />
     </section>

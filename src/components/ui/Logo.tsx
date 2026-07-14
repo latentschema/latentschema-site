@@ -16,7 +16,7 @@ export default function Logo({ markSize = 36, showTagline = false, wordmarkClass
           <span className="text-cobalt-bright">SCHEMA</span>
         </span>
         {showTagline && (
-          <span className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-slate-300 sm:block">
+          <span className="block text-[8px] font-semibold uppercase tracking-[0.1em] text-slate-300 sm:text-xs sm:tracking-[0.18em]">
             Uncovering Intelligence. Driving Action.
           </span>
         )}
