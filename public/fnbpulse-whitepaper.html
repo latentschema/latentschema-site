@@ -160,11 +160,7 @@
     .diff .num{ padding-top: 0; }
   }
 
-  /* ---------- fnbPulse360 wordmark (faithful to frontend/src/components/FnbPulseLogo.jsx) ---------- */
-  /* The 360 ring is absolutely-positioned and centered on the "360" text, so its
-     78px/44px diameter extends well past the wordmark's own flow box (mostly to
-     the left and above/below) — padding here has to clear that overflow, not
-     just wrap the text, or the ring spills past the badge's rounded edge. */
+  /* ---------- fnbPulse wordmark (faithful to src/components/ui/FnbPulseLogo.tsx) ---------- */
   .fnb-logo-badge{
     display: inline-flex; align-items: center;
   }
@@ -173,20 +169,22 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     user-select: none;
   }
+  .fnb-badge-circle{
+    width: 37px; height: 37px; flex-shrink: 0; border-radius: 50%;
+    background: #00E676; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .fnb-text-block{ display: flex; flex-direction: column; align-items: stretch; }
   .fnb-text{
-    font-size: 27px; letter-spacing: -0.3px; color: #ffffff;
-    display: flex; align-items: baseline;
+    font-size: 26px; font-weight: 800; letter-spacing: -0.3px; line-height: 1;
+    display: flex; align-items: baseline; white-space: nowrap;
   }
-  .fnb-text .brand-fnb{ font-style: italic; font-weight: 400; color: #ffffff; margin-right: 3px; }
+  .fnb-text .brand-fnb{ font-style: italic; font-weight: 600; color: #ffffff; margin-right: 3px; }
   .fnb-text .brand-pulse{ font-weight: 800; color: #00E676; }
-  .fnb-text .brand-360-wrap{ position: relative; display: inline-flex; align-items: center; margin-left: 2px; }
-  .fnb-text .brand-360-ring{
-    position: absolute; top: 50%; left: 50%; width: 78px; height: 78px;
-    transform: translate(-50%, -50%); pointer-events: none; overflow: visible;
-  }
-  .fnb-text .brand-360{ font-weight: 400; color: #ffffff; position: relative; z-index: 1; padding: 0 6px; }
+  .fnb-pulse-line{ display: block; width: 100%; height: 10px; margin-top: 1px; }
+  footer .fnb-badge-circle{ width: 26px; height: 26px; }
   footer .fnb-text{ font-size: 15px; }
-  footer .fnb-text .brand-360-ring{ width: 44px; height: 44px; }
+  footer .fnb-pulse-line{ height: 7px; }
 
   /* ---------- LatentSchema byline mark (parent engine) ---------- */
   .ls-byline{ display:inline-flex; align-items:center; gap: 8px; }
@@ -201,16 +199,32 @@
 <header class="cover">
   <div class="fnb-logo-badge" style="margin-bottom:28px;">
     <div class="fnb-logo-container">
-      <div class="fnb-text">
-        <span class="brand-fnb">fnb</span><span class="brand-pulse">Pulse</span>
-        <span class="brand-360-wrap">
-          <svg class="brand-360-ring" viewBox="0 0 50 50">
-            <path d="M 5.95 14 A 22 22 0 0 1 47 25" fill="none" stroke="#00E676" stroke-width="3" stroke-linecap="round"/>
-            <path d="M 47 25 A 22 22 0 0 1 5.95 36" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-            <polygon points="2.95,30.8 8.55,34.5 3.35,37.5" fill="#ffffff"/>
-          </svg>
-          <span class="brand-360">360</span>
-        </span>
+      <div class="fnb-badge-circle">
+        <svg width="27" height="27" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="11.5" stroke="#ffffff" stroke-width="0.8" fill="none"/>
+          <g transform="translate(12 12) scale(1.0) translate(-12 -12)">
+            <g transform="rotate(-35 12 12)" fill="#ffffff">
+              <rect x="10.0" y="2.7" width="0.78" height="4.5" rx="0.39"/>
+              <rect x="11.19" y="2.7" width="0.78" height="4.7" rx="0.39"/>
+              <rect x="12.38" y="2.7" width="0.78" height="4.7" rx="0.39"/>
+              <rect x="13.57" y="2.7" width="0.78" height="4.5" rx="0.39"/>
+              <path d="M10.0 6.6 H14.35 C14.52 8.2 13.35 9.25 12.72 9.78 C12.56 9.92 12.48 10.1 12.48 10.32 V11.1 H11.87 V10.32 C11.87 10.1 11.79 9.92 11.63 9.78 C11.0 9.25 9.83 8.2 10.0 6.6 Z"/>
+              <path d="M11.9 10.9 H12.45 C12.6 13.4 12.92 16.4 12.92 18.9 A0.74 0.74 0 0 1 11.44 18.9 C11.44 16.4 11.75 13.4 11.9 10.9 Z"/>
+            </g>
+            <g transform="rotate(35 12 12)" fill="#ffffff">
+              <path d="M12.6 2.6 C10.5 4.6 9.8 8.1 11.25 11.0 L12.6 11.0 Z"/>
+              <rect x="11.35" y="11.3" width="1.28" height="10.0" rx="0.64"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="fnb-text-block">
+        <div class="fnb-text">
+          <span class="brand-fnb">fnb</span><span class="brand-pulse">Pulse</span>
+        </div>
+        <svg class="fnb-pulse-line" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 5 H40 L44 0 L48 10 L52 0 L56 5 H100" fill="none" stroke="#00E676" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -429,16 +443,32 @@
 <footer>
   <div class="fnb-logo-badge">
     <div class="fnb-logo-container">
-      <div class="fnb-text">
-        <span class="brand-fnb">fnb</span><span class="brand-pulse">Pulse</span>
-        <span class="brand-360-wrap">
-          <svg class="brand-360-ring" viewBox="0 0 50 50">
-            <path d="M 5.95 14 A 22 22 0 0 1 47 25" fill="none" stroke="#00E676" stroke-width="3" stroke-linecap="round"/>
-            <path d="M 47 25 A 22 22 0 0 1 5.95 36" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
-            <polygon points="2.95,30.8 8.55,34.5 3.35,37.5" fill="#ffffff"/>
-          </svg>
-          <span class="brand-360">360</span>
-        </span>
+      <div class="fnb-badge-circle">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="11.5" stroke="#ffffff" stroke-width="0.8" fill="none"/>
+          <g transform="translate(12 12) scale(1.0) translate(-12 -12)">
+            <g transform="rotate(-35 12 12)" fill="#ffffff">
+              <rect x="10.0" y="2.7" width="0.78" height="4.5" rx="0.39"/>
+              <rect x="11.19" y="2.7" width="0.78" height="4.7" rx="0.39"/>
+              <rect x="12.38" y="2.7" width="0.78" height="4.7" rx="0.39"/>
+              <rect x="13.57" y="2.7" width="0.78" height="4.5" rx="0.39"/>
+              <path d="M10.0 6.6 H14.35 C14.52 8.2 13.35 9.25 12.72 9.78 C12.56 9.92 12.48 10.1 12.48 10.32 V11.1 H11.87 V10.32 C11.87 10.1 11.79 9.92 11.63 9.78 C11.0 9.25 9.83 8.2 10.0 6.6 Z"/>
+              <path d="M11.9 10.9 H12.45 C12.6 13.4 12.92 16.4 12.92 18.9 A0.74 0.74 0 0 1 11.44 18.9 C11.44 16.4 11.75 13.4 11.9 10.9 Z"/>
+            </g>
+            <g transform="rotate(35 12 12)" fill="#ffffff">
+              <path d="M12.6 2.6 C10.5 4.6 9.8 8.1 11.25 11.0 L12.6 11.0 Z"/>
+              <rect x="11.35" y="11.3" width="1.28" height="10.0" rx="0.64"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="fnb-text-block">
+        <div class="fnb-text">
+          <span class="brand-fnb">fnb</span><span class="brand-pulse">Pulse</span>
+        </div>
+        <svg class="fnb-pulse-line" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 5 H40 L44 0 L48 10 L52 0 L56 5 H100" fill="none" stroke="#00E676" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+        </svg>
       </div>
     </div>
   </div>

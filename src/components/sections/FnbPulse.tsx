@@ -95,7 +95,7 @@ export default function FnbPulse() {
           </h2>
 
           <p className="text-lg leading-relaxed text-slate-400">
-            Built directly on top of the LatentSchema engine, fnbPulse 360
+            Built directly on top of the LatentSchema engine, fnbPulse
             bridges your scattered restaurant tech stack—automatically
             reconciling data between Clover POS systems and Xero accounting
             metrics to protect your margins from inflationary pressures.
