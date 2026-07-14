@@ -927,9 +927,15 @@ export default function FnbPulseExplainer() {
       setVoices(en);
       setVoiceName((prev) => {
         if (prev) return prev;
+        // Voice *names* differ per platform (Chrome, iOS/Safari, Android, Windows) and
+        // rarely say "Female" outright, so match known female voice names too — otherwise
+        // platforms without a "...Female" labeled voice fall back to whatever's first,
+        // which is often male (e.g. iOS's "Daniel" for en-GB).
+        const femaleNameRe = /female|samantha|karen|moira|tessa|fiona|kate|serena|ava|victoria|zira|hazel|susan|allison|shelley|amy|emma|joanna|salli|nicole/i;
         const preferred =
           en.find((v) => /Google UK English Female/i.test(v.name)) ||
-          en.find((v) => /Female/i.test(v.name) && v.lang === "en-GB") ||
+          en.find((v) => femaleNameRe.test(v.name) && v.lang === "en-GB") ||
+          en.find((v) => femaleNameRe.test(v.name)) ||
           en.find((v) => v.lang === "en-GB") ||
           en[0];
         return preferred ? preferred.name : "";
