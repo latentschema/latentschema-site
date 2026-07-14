@@ -29,7 +29,7 @@ export default function Hero() {
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
           The Foundational{' '}
           <span className="text-gradient-cobalt">Intelligence Layer</span> for
-          Fragmented Enterprise Data.
+          Fragmented Enterprise Data
         </h1>
 
         <p className="max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl">
