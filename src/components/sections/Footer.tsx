@@ -3,7 +3,7 @@ import type { FormEvent } from 'react'
 import Button from '../ui/Button'
 
 const inputStyles =
-  'w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition-colors focus:border-cobalt-bright/60 focus:outline-none focus:ring-2 focus:ring-cobalt-bright/20'
+  'rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition-colors focus:border-cobalt-bright/60 focus:outline-none focus:ring-2 focus:ring-cobalt-bright/20'
 
 const countryCodes = [
   { code: '+1', country: 'United States', flag: '🇺🇸' },
@@ -86,7 +86,7 @@ export default function Footer() {
                 type="text"
                 required
                 placeholder="Name"
-                className={inputStyles}
+                className={`${inputStyles} w-full`}
               />
             </div>
             <div>
@@ -99,7 +99,7 @@ export default function Footer() {
                 type="text"
                 required
                 placeholder="Company Name"
-                className={inputStyles}
+                className={`${inputStyles} w-full`}
               />
             </div>
             <div>
@@ -112,7 +112,7 @@ export default function Footer() {
                 type="email"
                 required
                 placeholder="Email Address"
-                className={inputStyles}
+                className={`${inputStyles} w-full`}
               />
             </div>
             <div className="flex gap-2">
@@ -142,7 +142,7 @@ export default function Footer() {
                 name="phone"
                 type="tel"
                 placeholder="Phone Number (optional)"
-                className={inputStyles}
+                className={`${inputStyles} min-w-0 flex-1`}
               />
             </div>
             <Button type="submit" variant="primary" className="mt-2 w-full" disabled={submitting}>
