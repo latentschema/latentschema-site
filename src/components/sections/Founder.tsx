@@ -29,10 +29,12 @@ export default function Founder() {
           </div>
 
           <blockquote className="max-w-xl text-lg italic leading-relaxed text-slate-400">
-            &ldquo;We founded LatentSchema to move past fragile prompt
-            wrappers and build true, localized data intelligence—deploying
-            custom machine intelligence into hospitality's margins, turning
-            chaotic data into autonomous business infrastructure.&rdquo;
+            &ldquo;LatentSchema builds localized machine intelligence for
+            enterprises. We replace fragile prompt-based workflows with
+            systems that understand a company&apos;s proprietary data,
+            transforming operational complexity into autonomous
+            infrastructure that drives efficiency, resilience, and
+            growth.&rdquo;
           </blockquote>
 
           <div className="flex items-center gap-4">

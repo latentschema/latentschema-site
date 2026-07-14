@@ -161,7 +161,7 @@
 
   /* ---------- LatentSchema wordmark ---------- */
   .ls-logo{ display:inline-flex; align-items:center; gap: 12px; }
-  .ls-mark{ position: relative; flex-shrink:0; }
+  .ls-mark{ position: relative; flex-shrink:0; overflow: visible; }
   .ls-word{ font-weight: 800; letter-spacing: -0.02em; font-size: 20px; }
   .ls-word .a{ color: var(--ink); }
   .ls-word .b{ color: var(--accent); }
@@ -172,12 +172,19 @@
 
 <header class="cover">
   <div class="ls-logo" style="margin-bottom:32px;">
-    <svg class="ls-mark" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-      <rect x="2" y="12" width="16" height="16" rx="3" fill="rgba(148,163,184,0.35)" transform="rotate(45 10 20)"/>
-      <rect x="22" y="12" width="16" height="16" rx="3" fill="none" stroke="#3B82F6" stroke-width="1.5" transform="rotate(45 30 20)"/>
+    <svg class="ls-mark" width="56" height="56" viewBox="0 0 40 40" aria-hidden="true">
+      <defs>
+        <filter id="ls-glow" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur stdDeviation="3"/>
+        </filter>
+      </defs>
+      <rect x="0" y="7.6" width="24.8" height="24.8" rx="3" fill="rgba(148,163,184,0.3)" transform="rotate(45 12.4 20)"/>
+      <rect x="15.2" y="7.6" width="24.8" height="24.8" rx="3" fill="none" stroke="#3B82F6" stroke-width="1.5" transform="rotate(45 27.6 20)"/>
+      <circle cx="20" cy="20" r="6" fill="#3B82F6" opacity="0.55" filter="url(#ls-glow)"/>
+      <circle cx="20" cy="20" r="4" fill="#ffffff" opacity="0.85" filter="url(#ls-glow)"/>
       <circle cx="20" cy="20" r="2.6" fill="#ffffff"/>
     </svg>
-    <span class="ls-word"><span class="a">LATENT</span><span class="b">SCHEMA</span></span>
+    <span class="ls-word" style="font-size:28px;"><span class="a">LATENT</span><span class="b">SCHEMA</span></span>
   </div>
   <p class="eyebrow"><span class="dot"></span>Whitepaper · LatentSchema</p>
   <h1 class="title">The Foundational <span class="grad">Intelligence Layer</span> for Fragmented Enterprise Data</h1>
@@ -330,8 +337,10 @@
 <footer>
   <div class="ls-logo">
     <svg class="ls-mark" width="24" height="24" viewBox="0 0 40 40" aria-hidden="true">
-      <rect x="2" y="12" width="16" height="16" rx="3" fill="rgba(148,163,184,0.35)" transform="rotate(45 10 20)"/>
-      <rect x="22" y="12" width="16" height="16" rx="3" fill="none" stroke="#3B82F6" stroke-width="1.5" transform="rotate(45 30 20)"/>
+      <rect x="0" y="7.6" width="24.8" height="24.8" rx="3" fill="rgba(148,163,184,0.3)" transform="rotate(45 12.4 20)"/>
+      <rect x="15.2" y="7.6" width="24.8" height="24.8" rx="3" fill="none" stroke="#3B82F6" stroke-width="1.5" transform="rotate(45 27.6 20)"/>
+      <circle cx="20" cy="20" r="6" fill="#3B82F6" opacity="0.55" filter="url(#ls-glow)"/>
+      <circle cx="20" cy="20" r="4" fill="#ffffff" opacity="0.85" filter="url(#ls-glow)"/>
       <circle cx="20" cy="20" r="2.6" fill="#ffffff"/>
     </svg>
     <span class="ls-word"><span class="a">LATENT</span><span class="b">SCHEMA</span></span>
