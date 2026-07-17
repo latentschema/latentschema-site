@@ -1,6 +1,7 @@
 import Button from '../ui/Button'
 import LogoMark from '../ui/LogoMark'
 import ScrollCue from '../ui/ScrollCue'
+import WhitepaperGate from '../ui/WhitepaperGate'
 
 export default function Hero() {
   return (
@@ -44,15 +45,13 @@ export default function Hero() {
               Contact Us
             </Button>
           </a>
-          <a
-            href={`${import.meta.env.BASE_URL}latentschema-whitepaper.html`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button variant="secondary" className="w-full sm:w-auto">
-              Read Technical Whitepaper
-            </Button>
-          </a>
+          <WhitepaperGate title="LatentSchema Technical Whitepaper" href="latentschema-whitepaper.html">
+            {(openGate) => (
+              <Button variant="secondary" className="w-full sm:w-auto" onClick={openGate}>
+                Read Technical Whitepaper
+              </Button>
+            )}
+          </WhitepaperGate>
         </div>
       </div>
 

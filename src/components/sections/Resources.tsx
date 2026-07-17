@@ -1,4 +1,5 @@
 import ScrollCue from '../ui/ScrollCue'
+import WhitepaperGate from '../ui/WhitepaperGate'
 
 const WHITEPAPERS = [
   {
@@ -37,48 +38,50 @@ export default function Resources() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {WHITEPAPERS.map((paper) => (
-            <a
-              key={paper.href}
-              href={`${import.meta.env.BASE_URL}${paper.href}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col gap-4 rounded-xl border border-white/10 bg-base-900/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cobalt-bright/40 hover:shadow-glow-cobalt"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-cobalt-bright/30 bg-cobalt-bright/10 text-cobalt-bright">
-                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                  <path
-                    d="M7 3.5h7l4 4V19a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 016 19V5A1.5 1.5 0 017.5 3.5z"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinejoin="round"
-                  />
-                  <path d="M14 3.5V8h4" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
-                  <path d="M9 12.5h6M9 15.5h6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-                </svg>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-semibold text-slate-50">{paper.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{paper.description}</p>
-              </div>
-
-              <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-cobalt-bright">
-                Read Whitepaper
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+            <WhitepaperGate key={paper.href} title={paper.title} href={paper.href}>
+              {(openGate) => (
+                <button
+                  type="button"
+                  onClick={openGate}
+                  className="group flex w-full flex-col gap-4 rounded-xl border border-white/10 bg-base-900/60 p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-cobalt-bright/40 hover:shadow-glow-cobalt"
                 >
-                  <path
-                    d="M7 17L17 7M17 7H9M17 7v8"
-                    stroke="currentColor"
-                    strokeWidth="1.75"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-            </a>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-cobalt-bright/30 bg-cobalt-bright/10 text-cobalt-bright">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                      <path
+                        d="M7 3.5h7l4 4V19a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 016 19V5A1.5 1.5 0 017.5 3.5z"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinejoin="round"
+                      />
+                      <path d="M14 3.5V8h4" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+                      <path d="M9 12.5h6M9 15.5h6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-50">{paper.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-400">{paper.description}</p>
+                  </div>
+
+                  <span className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-cobalt-bright">
+                    Read Whitepaper
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                    >
+                      <path
+                        d="M7 17L17 7M17 7H9M17 7v8"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              )}
+            </WhitepaperGate>
           ))}
         </div>
       </div>

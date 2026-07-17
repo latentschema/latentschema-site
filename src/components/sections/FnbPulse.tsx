@@ -3,6 +3,7 @@ import Button from '../ui/Button'
 import FnbPulseLogo from '../ui/FnbPulseLogo'
 import Modal from '../ui/Modal'
 import ScrollCue from '../ui/ScrollCue'
+import WhitepaperGate from '../ui/WhitepaperGate'
 import FeatureCard from './FeatureCard'
 import FnbPulseExplainer from './FnbPulseExplainer'
 
@@ -119,23 +120,26 @@ export default function FnbPulse() {
               See fnbPulse in 90 Seconds
             </button>
 
-            <a
-              href={`${import.meta.env.BASE_URL}fnbpulse-whitepaper.html`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold tracking-tight text-slate-100 transition-all duration-200 hover:border-cobalt-bright/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950"
-            >
-              Read the Whitepaper
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-                <path
-                  d="M7 17L17 7M17 7H9M17 7v8"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
+            <WhitepaperGate title="fnbPulse Whitepaper" href="fnbpulse-whitepaper.html">
+              {(openGate) => (
+                <button
+                  type="button"
+                  onClick={openGate}
+                  className="inline-flex items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold tracking-tight text-slate-100 transition-all duration-200 hover:border-cobalt-bright/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950"
+                >
+                  Read the Whitepaper
+                  <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                    <path
+                      d="M7 17L17 7M17 7H9M17 7v8"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
+            </WhitepaperGate>
           </div>
         </div>
 
