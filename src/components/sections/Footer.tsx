@@ -165,7 +165,7 @@ export default function Footer() {
             <span className="text-slate-400">LATENT</span>
             <span className="text-cobalt-bright">SCHEMA</span>
           </span>
-          <span>&copy; {new Date().getFullYear()} LatentSchema, Inc. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} Latent Schema Ltd. All rights reserved.</span>
         </div>
       </div>
     </footer>

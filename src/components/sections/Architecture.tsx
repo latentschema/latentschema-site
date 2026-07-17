@@ -46,7 +46,7 @@ export default function Architecture() {
         </div>
       </div>
 
-      <ScrollCue to="#team" />
+      <ScrollCue to="#resources" />
     </section>
   )
 }

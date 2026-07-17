@@ -127,6 +127,13 @@ export default function Header() {
           </a>
 
           <a
+            href="#resources"
+            className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
+          >
+            Resources
+          </a>
+
+          <a
             href="#team"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
@@ -187,6 +194,14 @@ export default function Header() {
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
               What's coming?
+            </a>
+
+            <a
+              href="#resources"
+              onClick={(event) => navigateFromMobileMenu(event, 'resources')}
+              className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
+            >
+              Resources
             </a>
 
             <a
