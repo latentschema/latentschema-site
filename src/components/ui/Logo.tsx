@@ -16,7 +16,10 @@ export default function Logo({ markSize = 36, showTagline = false, wordmarkClass
           <span className="text-cobalt-bright">SCHEMA</span>
         </span>
         {showTagline && (
-          <span className="block text-[8px] font-semibold uppercase tracking-[0.1em] text-slate-300 sm:text-xs sm:tracking-[0.18em]">
+          <span
+            className="block whitespace-nowrap text-[10px] font-semibold uppercase text-slate-300 sm:text-[13px]"
+            style={{ textAlign: 'justify', textAlignLast: 'justify' }}
+          >
             Uncovering Intelligence. Driving Action.
           </span>
         )}
