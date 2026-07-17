@@ -2,15 +2,13 @@ import { useRef, useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 import Modal from './Modal'
 import Button from './Button'
+import { countryCodes, inputStyles } from '../../lib/contactForm'
 
 interface WhitepaperGateProps {
   title: string
   href: string
   children: (openGate: () => void) => ReactNode
 }
-
-const inputStyles =
-  'w-full rounded-md border border-white/15 bg-white/5 px-4 py-3 text-sm text-slate-100 placeholder:text-slate-500 transition-colors focus:border-cobalt-bright/60 focus:outline-none focus:ring-2 focus:ring-cobalt-bright/20'
 
 export default function WhitepaperGate({ title, href, children }: WhitepaperGateProps) {
   const [open, setOpen] = useState(false)
@@ -73,7 +71,7 @@ export default function WhitepaperGate({ title, href, children }: WhitepaperGate
                 type="text"
                 required
                 placeholder="Name"
-                className={inputStyles}
+                className={`${inputStyles} w-full`}
               />
             </div>
             <div>
@@ -86,7 +84,7 @@ export default function WhitepaperGate({ title, href, children }: WhitepaperGate
                 type="text"
                 required
                 placeholder="Company Name"
-                className={inputStyles}
+                className={`${inputStyles} w-full`}
               />
             </div>
             <div>
@@ -99,7 +97,37 @@ export default function WhitepaperGate({ title, href, children }: WhitepaperGate
                 type="email"
                 required
                 placeholder="Email Address"
-                className={inputStyles}
+                className={`${inputStyles} w-full`}
+              />
+            </div>
+            <div className="flex gap-2">
+              <label htmlFor={`wp-phone-code-${href}`} className="sr-only">
+                Country Code
+              </label>
+              <select
+                id={`wp-phone-code-${href}`}
+                name="phoneCountryCode"
+                defaultValue=""
+                className={`${inputStyles} w-40 shrink-0 appearance-none`}
+              >
+                <option value="" disabled className="bg-base-900 text-slate-500">
+                  Country Code
+                </option>
+                {countryCodes.map(({ code, country, flag }) => (
+                  <option key={country} value={code} className="bg-base-900 text-slate-100">
+                    {flag} {country} ({code})
+                  </option>
+                ))}
+              </select>
+              <label htmlFor={`wp-phone-${href}`} className="sr-only">
+                Phone Number
+              </label>
+              <input
+                id={`wp-phone-${href}`}
+                name="phone"
+                type="tel"
+                placeholder="Phone Number (optional)"
+                className={`${inputStyles} min-w-0 flex-1`}
               />
             </div>
             <Button type="submit" variant="primary" className="mt-2 w-full" disabled={submitting}>
