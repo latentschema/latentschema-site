@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
+  <rect x="0" y="0" width="800" height="800" fill="#0B0F19"/>
+  <rect x="140.000" y="238.800" width="322.400" height="322.400" rx="39.000"
+        fill="rgba(148,163,184,0.3)"
+        transform="rotate(45 301.200 400.000)"/>
+  <rect x="337.600" y="238.800" width="322.400" height="322.400" rx="39.000"
+        fill="none" stroke="#3B82F6" stroke-width="19.500"
+        transform="rotate(45 498.800 400.000)"/>
+  <circle cx="400.000" cy="400.000" r="114.920" fill="#3B82F6" opacity="0.65" filter="url(#blurBlue)"/>
+  <circle cx="400.000" cy="400.000" r="57.460" fill="#FFFFFF" opacity="0.95" filter="url(#blurWhite)"/>
+  <circle cx="400.000" cy="400.000" r="33.800" fill="#FFFFFF"/>
+  <defs>
+    <filter id="blurBlue" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="84.500"/>
+    </filter>
+    <filter id="blurWhite" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="41.600"/>
+    </filter>
+  </defs>
+</svg>

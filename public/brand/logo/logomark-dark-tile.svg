@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  
+  
+  <rect x="0" y="0" width="512" height="512" rx="112.640" fill="#0B0F19"/><g transform="translate(92.160,92.160)">
+  <g id="dkmark">
+    <rect x="0" y="62.259" width="203.162" height="203.162" rx="24.576"
+          fill="rgba(148,163,184,0.3)"
+          transform="rotate(45 101.581 163.840)"/>
+    <rect x="124.518" y="62.259" width="203.162" height="203.162" rx="24.576"
+          fill="none" stroke="#3B82F6" stroke-width="12.288"
+          transform="rotate(45 226.099 163.840)"/>
+    <circle cx="163.840" cy="163.840" r="72.417" fill="#3B82F6" opacity="0.65" filter="url(#dkblurBlue)"/>
+    <circle cx="163.840" cy="163.840" r="36.209" fill="#FFFFFF" opacity="0.95" filter="url(#dkblurWhite)"/>
+    <circle cx="163.840" cy="163.840" r="21.299" fill="#FFFFFF"/>
+  </g>
+  <defs>
+    <filter id="dkblurBlue" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="53.248"/>
+    </filter>
+    <filter id="dkblurWhite" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="26.214"/>
+    </filter>
+  </defs></g>
+</svg>

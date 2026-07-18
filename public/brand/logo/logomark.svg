@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  
+  
+  
+  <g id="mark">
+    <rect x="0" y="97.280" width="317.440" height="317.440" rx="38.400"
+          fill="rgba(148,163,184,0.3)"
+          transform="rotate(45 158.720 256.000)"/>
+    <rect x="194.560" y="97.280" width="317.440" height="317.440" rx="38.400"
+          fill="none" stroke="#3B82F6" stroke-width="19.200"
+          transform="rotate(45 353.280 256.000)"/>
+    <circle cx="256.000" cy="256.000" r="113.152" fill="#3B82F6" opacity="0.65" filter="url(#blurBlue)"/>
+    <circle cx="256.000" cy="256.000" r="56.576" fill="#FFFFFF" opacity="0.95" filter="url(#blurWhite)"/>
+    <circle cx="256.000" cy="256.000" r="33.280" fill="#FFFFFF"/>
+  </g>
+  <defs>
+    <filter id="blurBlue" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="83.200"/>
+    </filter>
+    <filter id="blurWhite" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="40.960"/>
+    </filter>
+  </defs>
+</svg>
