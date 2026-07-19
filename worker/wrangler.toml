@@ -1,0 +1,17 @@
+name = "latentschema-whitepaper-gate"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# Free *.workers.dev subdomain — no DNS changes to latentschema.com required.
+# Add a [routes] section here later if you want this on a custom subdomain
+# (e.g. api.latentschema.com) instead.
+
+[vars]
+ALLOWED_ORIGINS = "https://latentschema.com,http://localhost:5173,http://localhost:5174,http://localhost:5175"
+SITE_URL = "https://latentschema.com"
+FROM_EMAIL = "LatentSchema <whitepapers@latentschema.com>"
+NOTIFY_EMAIL = "contact@latentschema.com"
+
+# Secrets (not stored here — set via `wrangler secret put`):
+#   RESEND_API_KEY
+#   TOKEN_SECRET
