@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Button from '../ui/Button'
-import { countryCodes, inputStyles } from '../../lib/contactForm'
+import { countryCodes, inputStyles, intentOptions, intentCtaLabels } from '../../lib/contactForm'
 
 export default function Footer() {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(false)
+  const [intent, setIntent] = useState('')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -69,6 +70,30 @@ export default function Footer() {
               />
             </div>
             <div>
+              <label htmlFor="intent" className="sr-only">
+                I&apos;m reaching out about...
+              </label>
+              <select
+                id="intent"
+                name="intent"
+                required
+                value={intent}
+                onChange={(event) => setIntent(event.target.value)}
+                className={`${inputStyles} w-full appearance-none ${
+                  intent === '' ? 'text-slate-500' : 'text-slate-100'
+                }`}
+              >
+                <option value="" disabled className="bg-base-900 text-slate-500">
+                  I&apos;m reaching out about...
+                </option>
+                {intentOptions.map((option) => (
+                  <option key={option} value={option} className="bg-base-900 text-slate-100">
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
               <label htmlFor="company" className="sr-only">
                 Company Name
               </label>
@@ -125,7 +150,7 @@ export default function Footer() {
               />
             </div>
             <Button type="submit" variant="primary" className="mt-2 w-full" disabled={submitting}>
-              {submitting ? 'Sending…' : "Let's Collaborate"}
+              {submitting ? 'Sending…' : intentCtaLabels[intent] ?? "Let's Collaborate"}
             </Button>
             {error && (
               <p className="text-sm text-red-400">

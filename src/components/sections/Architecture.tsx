@@ -44,6 +44,13 @@ export default function Architecture() {
             </div>
           ))}
         </div>
+
+        <a
+          href="#resources"
+          className="mt-16 block text-center text-lg font-semibold text-cobalt-bright transition-colors hover:text-cyan-glow"
+        >
+          Curious how this actually works under the hood?
+        </a>
       </div>
 
       <ScrollCue to="#resources" />

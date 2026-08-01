@@ -90,6 +90,34 @@ export default function Header() {
               }`}
             >
               <a
+                href="#architecture"
+                onClick={() => setProductsOpen(false)}
+                className="group/item flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors hover:bg-cobalt-bright/10"
+              >
+                <span>
+                  <span className="block text-sm font-semibold text-slate-100 group-hover/item:text-cobalt-bright">
+                    LatentSchema Engine
+                  </span>
+                  <span className="mt-0.5 block text-xs text-white">
+                    The platform / core technology
+                  </span>
+                </span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="h-4 w-4 shrink-0 text-slate-500 transition-all group-hover/item:translate-x-0.5 group-hover/item:text-cobalt-bright"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H9M17 7v8"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+
+              <a
                 href="#fnbpulse"
                 onClick={() => setProductsOpen(false)}
                 className="group/item flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors hover:bg-[#00E676]/10"
@@ -99,7 +127,7 @@ export default function Header() {
                     fnbPulse
                   </span>
                   <span className="mt-0.5 block text-xs text-white">
-                    Autonomous BI for hospitality
+                    Built on the engine, for hospitality
                   </span>
                 </span>
                 <svg
@@ -180,6 +208,14 @@ export default function Header() {
       {mobileOpen && (
         <nav className="border-t border-white/10 bg-base-950/95 px-6 py-4 md:hidden">
           <div className="flex flex-col gap-1">
+            <a
+              href="#architecture"
+              onClick={(event) => navigateFromMobileMenu(event, 'architecture')}
+              className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
+            >
+              LatentSchema Engine
+            </a>
+
             <a
               href="#fnbpulse"
               onClick={(event) => navigateFromMobileMenu(event, 'fnbpulse')}

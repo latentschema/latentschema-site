@@ -91,15 +91,15 @@ export default function FnbPulse() {
           </span>
 
           <h2 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
-            Autonomous Business{' '}
-            <span className="sm:whitespace-nowrap">Intelligence for Modern Hospitality.</span>
+            Your <span className="text-gradient-emerald">Restaurant&apos;s Numbers</span>, Finally
+            Talking to Each Other.
           </h2>
 
           <p className="text-lg leading-relaxed text-slate-400">
-            Built directly on top of the LatentSchema engine, fnbPulse
-            bridges your scattered restaurant tech stack—automatically
-            reconciling data between Clover POS systems and Xero accounting
-            metrics to protect your margins from inflationary pressures.
+            fnbPulse connects your POS (ex. Clover) and Accounting (ex. Xero)
+            system automatically, so you catch rising food costs and
+            shrinking margins before they show up on your P&amp;L. Built on
+            the LatentSchema engine.
           </p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row">

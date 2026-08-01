@@ -24,7 +24,7 @@ export default function Hero() {
 
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-cobalt-bright/30 bg-cobalt-bright/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
-          Autonomous Insights from Fragmented Data
+          AI That Works With the Data You Already Have
         </span>
 
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
@@ -34,9 +34,9 @@ export default function Hero() {
         </h1>
 
         <p className="max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl">
-          LatentSchema synthesizes disparate, legacy datasets into low-compute,
-          domain-specific machine intelligence. We eliminate complex database
-          migrations to deliver autonomous business intelligence at scale.
+          LatentSchema turns your scattered, legacy systems into real-time
+          business intelligence — no database migration, no rip-and-replace.
+          One engine, built to plug into the tools you already run.
         </p>
 
         <div className="mt-4 flex flex-col gap-4 sm:flex-row">
@@ -55,7 +55,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <ScrollCue to="#fnbpulse" />
+      <ScrollCue to="#engine" />
     </section>
   )
 }

@@ -28,7 +28,8 @@ export default function Resources() {
             Resources
           </span>
           <h2 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
-            Whitepapers for Clients &amp; Investors
+            Whitepapers for{' '}
+            <span className="text-gradient-cobalt">Clients &amp; Investors</span>
           </h2>
           <p className="text-lg leading-relaxed text-slate-400">
             Deep-dive documentation on the LatentSchema engine and the

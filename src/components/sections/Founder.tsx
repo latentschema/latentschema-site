@@ -6,16 +6,26 @@ export default function Founder() {
       id="team"
       className="relative flex min-h-[calc(100dvh-var(--header-h,88px))] scroll-mt-[var(--header-h,88px)] flex-col justify-center px-6 py-24 lg:px-8"
     >
-      <div className="mx-auto max-w-3xl text-center">
+      <div className="mx-auto max-w-5xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-cobalt-bright/30 bg-cobalt-bright/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
           Leadership
         </span>
         <h2 className="mt-4 text-center text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
-          Behind the Schema
+          Behind the <span className="text-gradient-cobalt">Schema</span>
         </h2>
 
-        <div className="mt-12">
-          <div className="panel mx-auto flex flex-col items-center gap-6 rounded-2xl p-10 text-center sm:p-12">
+        <blockquote className="mx-auto mt-8 max-w-2xl">
+          <p className="text-xl italic leading-relaxed text-slate-300">
+            &ldquo;Build the engine once, prove it in F&amp;B, expand
+            deliberately.&rdquo;
+          </p>
+          <footer className="mt-3 text-sm font-semibold text-cobalt-bright">
+            — Nandu Mahajan, Founder &amp; Principal Architect
+          </footer>
+        </blockquote>
+
+        <div className="mt-12 flex justify-center">
+          <div className="panel mx-auto flex h-full flex-col items-center gap-6 rounded-2xl p-10 text-center sm:p-12">
             <img
               src={`${import.meta.env.BASE_URL}images/nandu-mahajan.jpg`}
               alt="Nandu Mahajan"
@@ -30,23 +40,36 @@ export default function Founder() {
             </div>
 
             <p className="max-w-xl text-base leading-relaxed text-slate-400">
-              Nandu has spent nearly three decades turning complex data into
-              better decisions. After building enterprise technology and data
-              platforms at UBS and Goldman Sachs, he now brings that
-              experience to LatentSchema, creating practical AI products that
-              transform data and intelligence into meaningful action.
+              Nandu is the Founder of LatentSchema, a technology company
+              building intelligent data and AI solutions that help
+              organisations unlock the value of their data.
             </p>
 
-            <blockquote className="max-w-xl text-base italic leading-relaxed text-slate-400">
+            <p className="max-w-xl text-base leading-relaxed text-slate-400">
+              With nearly three decades of experience delivering enterprise
+              technology and data platforms at UBS and Goldman Sachs, Nandu
+              has seen a recurring challenge: organisations have vast amounts
+              of data, but lack the intelligence layer needed to connect,
+              understand and act on it.
+            </p>
+
+            <p className="max-w-xl text-base leading-relaxed text-slate-400">
+              Through LatentSchema, his vision is to build enterprise AI
+              solutions that transform proprietary data into actionable
+              intelligence, enabling businesses to improve efficiency,
+              strengthen resilience and unlock sustainable growth.
+            </p>
+
+            {/* <blockquote className="max-w-xl text-base italic leading-relaxed text-slate-400">
               &ldquo;LatentSchema builds localized machine intelligence for
               enterprises. We replace fragile prompt-based workflows with
               systems that understand a company&apos;s proprietary data,
               transforming operational complexity into autonomous
               infrastructure that drives efficiency, resilience, and
               growth.&rdquo;
-            </blockquote>
+            </blockquote> */}
 
-            <div className="flex items-center gap-4">
+            <div className="mt-auto flex items-center gap-4">
               <a
                 href="https://www.linkedin.com/in/nandu-mahajan/"
                 target="_blank"
@@ -70,6 +93,57 @@ export default function Founder() {
               </a>
             </div>
           </div>
+
+          {/* <div className="panel mx-auto flex h-full flex-col items-center gap-6 rounded-2xl p-10 text-center sm:p-12">
+            <img
+              src={`${import.meta.env.BASE_URL}images/saurabh-kale.jpg`}
+              alt="Saurabh Kale"
+              className="h-24 w-24 shrink-0 rounded-full border border-cobalt-bright/30 object-cover shadow-glow-cobalt"
+            />
+
+            <div>
+              <p className="text-lg font-semibold text-slate-50">Saurabh Kale</p>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.15em] text-cobalt-bright">
+                F&amp;B SME, Marketing Head
+              </p>
+            </div>
+
+            <p className="max-w-xl text-base leading-relaxed text-slate-400">
+              Saurabh is an entrepreneur, founder and investor with
+              experience across food and beverage, finance and business
+              strategy. He is the co-founder of Full Circle Holdings Group in
+              Singapore, where he focuses on building, scaling and investing
+              in F&amp;B businesses through a long-term approach to value
+              creation.
+            </p>
+
+            <p className="max-w-xl text-base leading-relaxed text-slate-400">
+              Previously, Saurabh built a career in global banking, bringing
+              extensive financial and strategic expertise to his
+              entrepreneurial ventures. A qualified Chartered Accountant, he
+              has a strong foundation in financial management, investment and
+              business development.
+            </p>
+
+            <p className="max-w-xl text-base leading-relaxed text-slate-400">
+              His broader vision is to expand internationally while building
+              integrated, end-to-end solutions across the F&amp;B ecosystem.
+            </p>
+
+            <div className="mt-auto flex items-center gap-4">
+              <a
+                href="https://www.linkedin.com/in/saurabh-kale-388ab229/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-slate-300 transition-colors hover:border-cobalt-bright/50 hover:text-cobalt-bright"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+            </div>
+          </div> */}
         </div>
       </div>
 

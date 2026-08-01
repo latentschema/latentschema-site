@@ -1,6 +1,7 @@
 import Header from './components/layout/Header'
 import LogoMark from './components/ui/LogoMark'
 import Hero from './components/sections/Hero'
+import EngineBridge from './components/sections/EngineBridge'
 import FnbPulse from './components/sections/FnbPulse'
 import Architecture from './components/sections/Architecture'
 import Resources from './components/sections/Resources'
@@ -19,6 +20,7 @@ function App() {
       <Header />
       <main>
         <Hero />
+        <EngineBridge />
         <FnbPulse />
         <Architecture />
         <Resources />
