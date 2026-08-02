@@ -147,7 +147,7 @@ export default function Founder() {
         </div>
       </div>
 
-      <ScrollCue to="#waitlist" />
+      <ScrollCue to="#linkedin" />
     </section>
   )
 }

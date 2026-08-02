@@ -1,5 +1,6 @@
 import Button from '../ui/Button'
 import LogoMark from '../ui/LogoMark'
+import NeuralNetworkBackground from '../ui/NeuralNetworkBackground'
 import ScrollCue from '../ui/ScrollCue'
 import WhitepaperGate from '../ui/WhitepaperGate'
 
@@ -13,6 +14,7 @@ export default function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-grid-pattern bg-grid opacity-60"
       />
+      <NeuralNetworkBackground symbol="logomark" />
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-radial-glow" />
       <div
         aria-hidden

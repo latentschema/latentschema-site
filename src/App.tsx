@@ -6,6 +6,7 @@ import FnbPulse from './components/sections/FnbPulse'
 import Architecture from './components/sections/Architecture'
 import Resources from './components/sections/Resources'
 import Founder from './components/sections/Founder'
+import LinkedInFeed from './components/sections/LinkedInFeed'
 import Footer from './components/sections/Footer'
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Architecture />
         <Resources />
         <Founder />
+        <LinkedInFeed />
       </main>
       <Footer />
     </div>

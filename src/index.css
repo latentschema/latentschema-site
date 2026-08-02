@@ -42,6 +42,24 @@
   .engine-diagram-node:hover {
     filter: drop-shadow(0px 0px 8px #22d3ee);
   }
+
+  .hero-neural-edge {
+    opacity: 0.3;
+  }
+
+  .hero-neural-node {
+    animation: heroNeuralPulse 4s ease-in-out infinite;
+  }
+}
+
+@keyframes heroNeuralPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes engineDiagramDash {
