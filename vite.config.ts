@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: resolve(process.cwd(), 'index.html'),
         engine: resolve(process.cwd(), 'engine.html'),
+        fnbpulse: resolve(process.cwd(), 'fnbpulse.html'),
       },
     },
   },

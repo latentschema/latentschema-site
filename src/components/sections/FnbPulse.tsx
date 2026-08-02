@@ -58,7 +58,11 @@ const FEATURES = [
   },
 ]
 
-export default function FnbPulse() {
+interface FnbPulseProps {
+  nextHref?: string
+}
+
+export default function FnbPulse({ nextHref = '#architecture' }: FnbPulseProps) {
   const [videoOpen, setVideoOpen] = useState(false)
 
   return (
@@ -154,7 +158,7 @@ export default function FnbPulse() {
         <FnbPulseExplainer />
       </Modal>
 
-      <ScrollCue to="#architecture" />
+      <ScrollCue to={nextHref} />
     </section>
   )
 }

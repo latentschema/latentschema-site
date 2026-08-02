@@ -125,7 +125,7 @@ export default function Header() {
               </a>
 
               <a
-                href="/#fnbpulse"
+                href="/fnbpulse.html"
                 onClick={() => setProductsOpen(false)}
                 className="group/item flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors hover:bg-[#00E676]/10"
               >
@@ -224,8 +224,8 @@ export default function Header() {
             </a>
 
             <a
-              href="/#fnbpulse"
-              onClick={(event) => navigateFromMobileMenu(event, 'fnbpulse')}
+              href="/fnbpulse.html"
+              onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-[#00E676]/10 hover:text-[#00E676]"
             >
               fnbPulse
