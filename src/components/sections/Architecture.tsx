@@ -7,7 +7,15 @@ const SPECS = [
   { label: 'Inference profile', value: 'Ultra-low latency, low compute' },
 ]
 
-export default function Architecture() {
+interface ArchitectureProps {
+  nextHref?: string
+  whitepapersHref?: string
+}
+
+export default function Architecture({
+  nextHref = '#resources',
+  whitepapersHref = '#resources',
+}: ArchitectureProps) {
   return (
     <section
       id="architecture"
@@ -46,14 +54,14 @@ export default function Architecture() {
         </div>
 
         <a
-          href="#resources"
+          href={whitepapersHref}
           className="mt-16 block text-center text-lg font-semibold text-cobalt-bright transition-colors hover:text-cyan-glow"
         >
           Curious how this actually works under the hood?
         </a>
       </div>
 
-      <ScrollCue to="#resources" />
+      <ScrollCue to={nextHref} />
     </section>
   )
 }

@@ -1,7 +1,11 @@
 import EngineArchitectureDiagram from '../ui/EngineArchitectureDiagram'
 import ScrollCue from '../ui/ScrollCue'
 
-export default function EngineBridge() {
+interface EngineBridgeProps {
+  nextHref?: string
+}
+
+export default function EngineBridge({ nextHref = '#fnbpulse' }: EngineBridgeProps) {
   return (
     <section
       id="engine"
@@ -26,7 +30,7 @@ export default function EngineBridge() {
         <EngineArchitectureDiagram />
       </div>
 
-      <ScrollCue to="#fnbpulse" />
+      <ScrollCue to={nextHref} />
     </section>
   )
 }

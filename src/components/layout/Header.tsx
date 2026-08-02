@@ -19,6 +19,13 @@ export default function Header() {
   }
 
   function navigateFromMobileMenu(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    // if the target section isn't on this page, let the link navigate
+    // normally (e.g. to /#resources from engine.html) instead of intercepting
+    if (!document.getElementById(id)) {
+      setMobileOpen(false)
+      return
+    }
+
     event.preventDefault()
     setMobileOpen(false)
     // wait for the panel to actually collapse and the layout to settle
@@ -51,7 +58,7 @@ export default function Header() {
         ref={headerRef}
         className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-8"
       >
-        <a href="#top" className="shrink-0">
+        <a href="/#top" className="shrink-0">
           <span className="hidden sm:block">
             <Logo showTagline markSize={72} wordmarkClassName="text-4xl" />
           </span>
@@ -90,7 +97,7 @@ export default function Header() {
               }`}
             >
               <a
-                href="#architecture"
+                href="/engine.html"
                 onClick={() => setProductsOpen(false)}
                 className="group/item flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors hover:bg-cobalt-bright/10"
               >
@@ -118,7 +125,7 @@ export default function Header() {
               </a>
 
               <a
-                href="#fnbpulse"
+                href="/#fnbpulse"
                 onClick={() => setProductsOpen(false)}
                 className="group/item flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors hover:bg-[#00E676]/10"
               >
@@ -148,28 +155,28 @@ export default function Header() {
           </div>
 
           <a
-            href="#architecture"
+            href="/#architecture"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
             What's coming?
           </a>
 
           <a
-            href="#resources"
+            href="/#resources"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
             Resources
           </a>
 
           <a
-            href="#team"
+            href="/#team"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
             About Us
           </a>
 
           <a
-            href="#waitlist"
+            href="/#waitlist"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
             Contact
@@ -209,15 +216,15 @@ export default function Header() {
         <nav className="border-t border-white/10 bg-base-950/95 px-6 py-4 md:hidden">
           <div className="flex flex-col gap-1">
             <a
-              href="#architecture"
-              onClick={(event) => navigateFromMobileMenu(event, 'architecture')}
+              href="/engine.html"
+              onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
               LatentSchema Engine
             </a>
 
             <a
-              href="#fnbpulse"
+              href="/#fnbpulse"
               onClick={(event) => navigateFromMobileMenu(event, 'fnbpulse')}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-[#00E676]/10 hover:text-[#00E676]"
             >
@@ -225,7 +232,7 @@ export default function Header() {
             </a>
 
             <a
-              href="#architecture"
+              href="/#architecture"
               onClick={(event) => navigateFromMobileMenu(event, 'architecture')}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
@@ -233,7 +240,7 @@ export default function Header() {
             </a>
 
             <a
-              href="#resources"
+              href="/#resources"
               onClick={(event) => navigateFromMobileMenu(event, 'resources')}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
@@ -241,7 +248,7 @@ export default function Header() {
             </a>
 
             <a
-              href="#team"
+              href="/#team"
               onClick={(event) => navigateFromMobileMenu(event, 'team')}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
@@ -249,7 +256,7 @@ export default function Header() {
             </a>
 
             <a
-              href="#waitlist"
+              href="/#waitlist"
               onClick={(event) => navigateFromMobileMenu(event, 'waitlist')}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >

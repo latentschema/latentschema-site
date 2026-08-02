@@ -159,47 +159,49 @@ export default function NeuralNetworkBackground({ symbol = 'none' }: NeuralNetwo
           </feMerge>
         </filter>
       </defs>
-      {EDGES.map(([a, b], i) => (
-        <line
-          key={i}
-          x1={NODES[a].x}
-          y1={NODES[a].y}
-          x2={NODES[b].x}
-          y2={NODES[b].y}
-          stroke="#3B82F6"
-          strokeWidth="1.5"
-          className="hero-neural-edge"
-        />
-      ))}
-      {SymbolComponent &&
-        CENTER_LINKS.map((i) => (
+      <g opacity="0.55">
+        {EDGES.map(([a, b], i) => (
           <line
-            key={`center-${i}`}
-            x1={NODES[i].x}
-            y1={NODES[i].y}
-            x2={CENTER.x}
-            y2={CENTER.y}
-            stroke="#22D3EE"
+            key={i}
+            x1={NODES[a].x}
+            y1={NODES[a].y}
+            x2={NODES[b].x}
+            y2={NODES[b].y}
+            stroke="#3B82F6"
             strokeWidth="1.5"
             className="hero-neural-edge"
           />
         ))}
-      {NODES.map((n, i) => {
-        const color = i % 2 === 0 ? '#3B82F6' : '#22D3EE'
-        const major = i % 3 === 0
-        const innerR = major ? 10 : 6.5
-        return (
-          <g
-            key={i}
-            className="hero-neural-node"
-            style={{ animationDelay: `${(i % 7) * 0.4}s` }}
-          >
-            <circle cx={n.x} cy={n.y} r={innerR + 7} fill="none" stroke={color} strokeWidth="1.5" opacity="0.5" />
-            <circle cx={n.x} cy={n.y} r={innerR + 13} fill="none" stroke={color} strokeWidth="1" opacity="0.25" />
-            <circle cx={n.x} cy={n.y} r={innerR} fill={color} />
-          </g>
-        )
-      })}
+        {SymbolComponent &&
+          CENTER_LINKS.map((i) => (
+            <line
+              key={`center-${i}`}
+              x1={NODES[i].x}
+              y1={NODES[i].y}
+              x2={CENTER.x}
+              y2={CENTER.y}
+              stroke="#22D3EE"
+              strokeWidth="1.5"
+              className="hero-neural-edge"
+            />
+          ))}
+        {NODES.map((n, i) => {
+          const color = i % 2 === 0 ? '#3B82F6' : '#22D3EE'
+          const major = i % 3 === 0
+          const innerR = major ? 10 : 6.5
+          return (
+            <g
+              key={i}
+              className="hero-neural-node"
+              style={{ animationDelay: `${(i % 7) * 0.4}s` }}
+            >
+              <circle cx={n.x} cy={n.y} r={innerR + 7} fill="none" stroke={color} strokeWidth="1.5" opacity="0.5" />
+              <circle cx={n.x} cy={n.y} r={innerR + 13} fill="none" stroke={color} strokeWidth="1" opacity="0.25" />
+              <circle cx={n.x} cy={n.y} r={innerR} fill={color} />
+            </g>
+          )
+        })}
+      </g>
       {SymbolComponent && <SymbolComponent />}
     </svg>
   )
