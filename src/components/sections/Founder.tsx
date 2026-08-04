@@ -104,7 +104,7 @@ export default function Founder() {
             <div>
               <p className="text-base font-semibold text-slate-50">Saurabh Kale</p>
               <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.15em] text-cobalt-bright">
-                F&amp;B SME, Marketing Head
+                F&amp;B SME &amp; Marketing Head
               </p>
             </div>
 
