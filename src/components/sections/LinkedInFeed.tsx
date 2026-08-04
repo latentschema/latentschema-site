@@ -44,7 +44,7 @@ export default function LinkedInFeed() {
   return (
     <section
       id="linkedin"
-      className="relative flex min-h-[calc(100dvh-var(--header-h,88px))] scroll-mt-[var(--header-h,88px)] flex-col justify-center border-y border-white/10 bg-base-900/40 px-6 py-24 lg:px-8"
+      className="relative flex min-h-[calc(100dvh-var(--header-h,88px))] scroll-mt-[var(--header-h,88px)] flex-col justify-center border-y border-white/10 bg-base-900/40 px-6 py-12 lg:px-8"
     >
       <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
@@ -75,7 +75,7 @@ export default function LinkedInFeed() {
                     src={post.src}
                     title={post.title}
                     loading="lazy"
-                    className="h-[560px] w-full"
+                    className="h-[460px] w-full"
                     frameBorder="0"
                     allowFullScreen
                   />
