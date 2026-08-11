@@ -30,7 +30,7 @@ const SCREENS = [
   },
   {
     src: '/images/product/5-fnbpulse-spend-analytics.png',
-    title: 'Spend Analytics',
+    title: 'Supply Analytics',
     description:
       'Ingredient and supplier spend trends with price-anomaly detection, aggregated by category or by supplier.',
   },
