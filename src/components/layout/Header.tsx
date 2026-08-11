@@ -162,14 +162,14 @@ export default function Header() {
           </a>
 
           <a
-            href="/#resources"
+            href="/resources.html"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
             Resources
           </a>
 
           <a
-            href="/#team"
+            href="/about.html"
             className="text-sm font-medium text-slate-200 transition-colors hover:text-cobalt-bright"
           >
             About Us
@@ -240,16 +240,16 @@ export default function Header() {
             </a>
 
             <a
-              href="/#resources"
-              onClick={(event) => navigateFromMobileMenu(event, 'resources')}
+              href="/resources.html"
+              onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
               Resources
             </a>
 
             <a
-              href="/#team"
-              onClick={(event) => navigateFromMobileMenu(event, 'team')}
+              href="/about.html"
+              onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
               About Us

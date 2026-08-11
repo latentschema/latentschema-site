@@ -11,6 +11,8 @@ export default defineConfig({
         main: resolve(process.cwd(), 'index.html'),
         engine: resolve(process.cwd(), 'engine.html'),
         fnbpulse: resolve(process.cwd(), 'fnbpulse.html'),
+        about: resolve(process.cwd(), 'about.html'),
+        resources: resolve(process.cwd(), 'resources.html'),
       },
     },
   },

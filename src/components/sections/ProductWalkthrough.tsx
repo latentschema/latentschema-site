@@ -1,0 +1,377 @@
+import { useEffect, useRef, useState } from 'react'
+import Modal from '../ui/Modal'
+import ScrollCue from '../ui/ScrollCue'
+
+const SCREENS = [
+  {
+    src: '/images/product/1-fnbpulse-managers-cockpit.png',
+    title: "Manager's Cockpit",
+    description:
+      'Revenue, profit, COGS, and labor-cost dashboard across all branches, with a "Needs Attention" feed flagging dishes running over target food cost.',
+    highlight: true,
+  },
+  {
+    src: '/images/product/2-fnbpulse-sales-analytics.png',
+    title: 'Sales Analytics',
+    description:
+      'Revenue, COGS, and margin by menu item or ingredient, grouped by category with month-over-month trend and margin tracking.',
+  },
+  {
+    src: '/images/product/3-fnbpulse-consumption-analytics.png',
+    title: 'Consumption Analytics',
+    description:
+      'Revenue attributed to every raw ingredient, surfacing which ones drive the most sales across the whole menu.',
+  },
+  {
+    src: '/images/product/4-fnbpulse-inventory-analytics.png',
+    title: 'Inventory Analytics',
+    description:
+      'Opening, purchased, sold, and closing inventory value tracked by month, with a full line-by-line breakdown per ingredient.',
+  },
+  {
+    src: '/images/product/5-fnbpulse-spend-analytics.png',
+    title: 'Spend Analytics',
+    description:
+      'Ingredient and supplier spend trends with price-anomaly detection, aggregated by category or by supplier.',
+  },
+  {
+    src: '/images/product/6-fnbpulse-menu-analytics.png',
+    title: 'Menu Analytics',
+    description:
+      'A Stars / Plowhorses / Puzzles / Dogs profitability matrix scoring every dish on popularity and margin, with suggested price actions.',
+    highlight: true,
+  },
+  {
+    src: '/images/product/7-fnbpulse-sales.png',
+    title: 'Sales Ledger',
+    description:
+      'Full receipt-level sales history across branches, drillable down to line items and payment detail for any transaction.',
+  },
+  {
+    src: '/images/product/8-fnbpulse-purchases.png',
+    title: 'Purchases',
+    description:
+      'Purchase history across suppliers and branches, reconciled invoice-by-invoice with subtotal, tax, and total.',
+  },
+  {
+    src: '/images/product/9-fnbpulse-invoice.jpg',
+    title: 'Invoice Processing',
+    description:
+      'OCR and AI-based invoice coding: scanned supplier invoices are read automatically and matched line-by-line to ingredients, updating inventory quantities and cost with no manual entry.',
+    highlight: true,
+  },
+  {
+    src: '/images/product/10-fnbpulse-inventory-overview.png',
+    title: 'Inventory Overview',
+    description:
+      'Stock movement per ingredient — opening, purchased, sold, and closing — with a rolling chart and monthly ledger.',
+  },
+  {
+    src: '/images/product/11-fnbpulse-inventory-prices.png',
+    title: 'Price History',
+    description:
+      'Full price history per ingredient by supplier and invoice, with automatic flagging of unusual price jumps.',
+  },
+  {
+    src: '/images/product/12-fnbpulse-menu-catalog.png',
+    title: 'Menu Catalog',
+    description:
+      'Every dish with live price, cost, and food-cost %, color-coded against target.',
+  },
+  {
+    src: '/images/product/13-fnbpulse-menu-cogs.png',
+    title: 'Recipe Costing',
+    description:
+      'Bill-of-materials costing for each dish, with an ingredient-level breakdown and an auto-suggested price to hit target food cost.',
+  },
+  {
+    src: '/images/product/14-fnbpulse-cost-simlulator.png',
+    title: 'Cost Simulator',
+    description:
+      '"What if this ingredient\'s price changed?" — a what-if simulator showing exactly which dishes are affected before it actually happens.',
+  },
+  {
+    src: '/images/product/15-fnbpulse-labour-roster.png',
+    title: 'Labor Roster',
+    description:
+      'Weekly labor scheduling by role, cost, and shift, benchmarked against expected demand per branch.',
+  },
+]
+
+interface ProductWalkthroughProps {
+  nextHref?: string
+  compact?: boolean
+}
+
+export default function ProductWalkthrough({
+  nextHref,
+  compact = false,
+}: ProductWalkthroughProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const screens = compact ? SCREENS.filter((screen) => screen.highlight) : SCREENS
+  const active = activeIndex !== null ? screens[activeIndex] : null
+  const scrollerRef = useRef<HTMLDivElement>(null)
+
+  function scrollByCard(direction: 1 | -1) {
+    const scroller = scrollerRef.current
+    if (!scroller) return
+    scroller.scrollBy({ left: direction * scroller.clientWidth * 0.85, behavior: 'smooth' })
+  }
+
+  function showRelative(direction: 1 | -1) {
+    setActiveIndex((current) => {
+      if (current === null) return current
+      return (current + direction + screens.length) % screens.length
+    })
+  }
+
+  useEffect(() => {
+    if (activeIndex === null) return
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'ArrowRight') showRelative(1)
+      if (event.key === 'ArrowLeft') showRelative(-1)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex, screens.length])
+
+  return (
+    <section
+      id="product"
+      className={`relative scroll-mt-[var(--header-h,88px)] px-6 lg:px-8 ${
+        compact ? 'py-16' : 'py-24'
+      }`}
+    >
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#00E676]/30 bg-[#00E676]/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-[#00E676]">
+            Product Walkthrough &middot; Live App
+          </span>
+          <h2 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
+            Inside <span className="text-gradient-emerald">fnbPulse</span>, Today
+          </h2>
+          <p className="text-lg leading-relaxed text-slate-400">
+            Screens from the live product, currently deployed for early restaurant
+            customers.
+          </p>
+        </div>
+
+        <div className="mx-auto mt-8 max-w-3xl rounded-xl border border-white/10 bg-base-900/60 p-5 text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-[#00E676]">
+            Current Stage
+          </p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-300">
+            Core product is built and live &mdash; fnbPulse is deployed for early restaurant
+            customers, with automated Xero accounting sync running in production
+            today. POS integrations, including Clover, are rolling out as we
+            onboard new operators.
+          </p>
+        </div>
+
+        {compact ? (
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {screens.map((screen) => (
+              <button
+                key={screen.src}
+                type="button"
+                onClick={() => setActiveIndex(screens.indexOf(screen))}
+                className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)]"
+              >
+                <div className="overflow-hidden border-b border-white/10">
+                  <img
+                    src={screen.src}
+                    alt={screen.title}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col gap-2 p-5">
+                  <h3 className="text-base font-semibold text-slate-50">{screen.title}</h3>
+                  <p className="text-sm leading-relaxed text-slate-400">
+                    {screen.description}
+                  </p>
+                </div>
+                <span className="mx-5 mb-4 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[#00E676]">
+                  View full size
+                  <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
+                    <path
+                      d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <div className="relative mt-12">
+            <div
+              ref={scrollerRef}
+              className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {screens.map((screen) => (
+                <button
+                  key={screen.src}
+                  type="button"
+                  onClick={() => setActiveIndex(screens.indexOf(screen))}
+                  className="group flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-300 hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] sm:w-[440px]"
+                >
+                  <div className="overflow-hidden border-b border-white/10">
+                    <img
+                      src={screen.src}
+                      alt={screen.title}
+                      loading="lazy"
+                      className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-2 p-5">
+                    <h3 className="text-base font-semibold text-slate-50">{screen.title}</h3>
+                    <p className="text-sm leading-relaxed text-slate-400">
+                      {screen.description}
+                    </p>
+                  </div>
+                  <span className="mx-5 mb-4 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[#00E676]">
+                    View full size
+                    <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
+                      <path
+                        d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollByCard(-1)}
+              aria-label="Scroll left"
+              className="absolute left-0 top-1/2 hidden h-11 w-11 -translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/90 text-slate-300 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] lg:flex"
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                <path
+                  d="M15 6l-6 6 6 6"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollByCard(1)}
+              aria-label="Scroll right"
+              className="absolute right-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 translate-x-4 items-center justify-center rounded-full border border-white/15 bg-base-950/90 text-slate-300 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] lg:flex"
+            >
+              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                <path
+                  d="M9 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {compact && (
+          <div className="mt-10 text-center">
+            <a
+              href="/fnbpulse.html#product"
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-[#00E676]/60 bg-[#00E676] px-6 py-3 text-sm font-semibold tracking-tight text-base-950 shadow-[0_0_24px_rgba(0,230,118,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110"
+            >
+              See the Full Product Walkthrough
+              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+        )}
+      </div>
+
+      <Modal open={active !== null} onClose={() => setActiveIndex(null)}>
+        {active && activeIndex !== null && (
+          <div className="flex flex-col gap-4">
+            <div className="relative">
+              <img src={active.src} alt={active.title} className="w-full rounded-lg" />
+
+              {screens.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => showRelative(-1)}
+                    aria-label="Previous screenshot"
+                    className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/80 text-slate-200 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] sm:left-3"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                      <path
+                        d="M15 6l-6 6 6 6"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => showRelative(1)}
+                    aria-label="Next screenshot"
+                    className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/80 text-slate-200 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] sm:right-3"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                      <path
+                        d="M9 6l6 6-6 6"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="text-lg font-semibold text-slate-50">{active.title}</h3>
+                {screens.length > 1 && (
+                  <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                    {activeIndex + 1} / {screens.length}
+                  </span>
+                )}
+              </div>
+              <p className="mt-1 text-sm leading-relaxed text-slate-400">
+                {active.description}
+              </p>
+            </div>
+          </div>
+        )}
+      </Modal>
+
+      {nextHref && <ScrollCue to={nextHref} />}
+    </section>
+  )
+}

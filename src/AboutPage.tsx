@@ -1,9 +1,9 @@
 import Header from './components/layout/Header'
 import LogoMark from './components/ui/LogoMark'
-import FnbPulse from './components/sections/FnbPulse'
+import Founder from './components/sections/Founder'
 import Footer from './components/sections/Footer'
 
-function FnbPulsePage() {
+function AboutPage() {
   return (
     <div className="min-h-screen bg-base-950">
       <div
@@ -14,11 +14,11 @@ function FnbPulsePage() {
       </div>
       <Header />
       <main>
-        <FnbPulse nextHref="#waitlist" fullWalkthrough />
+        <Founder nextHref="#waitlist" />
       </main>
       <Footer />
     </div>
   )
 }
 
-export default FnbPulsePage
+export default AboutPage

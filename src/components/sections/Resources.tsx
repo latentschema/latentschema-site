@@ -16,7 +16,11 @@ const WHITEPAPERS = [
   },
 ]
 
-export default function Resources() {
+interface ResourcesProps {
+  nextHref?: string
+}
+
+export default function Resources({ nextHref = '#linkedin' }: ResourcesProps) {
   return (
     <section
       id="resources"
@@ -87,7 +91,7 @@ export default function Resources() {
         </div>
       </div>
 
-      <ScrollCue to="#team" />
+      <ScrollCue to={nextHref} />
     </section>
   )
 }

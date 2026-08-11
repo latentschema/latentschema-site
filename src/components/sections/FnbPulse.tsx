@@ -6,6 +6,7 @@ import ScrollCue from '../ui/ScrollCue'
 import WhitepaperGate from '../ui/WhitepaperGate'
 import FeatureCard from './FeatureCard'
 import FnbPulseExplainer from './FnbPulseExplainer'
+import ProductWalkthrough from './ProductWalkthrough'
 
 const FEATURES = [
   {
@@ -60,16 +61,21 @@ const FEATURES = [
 
 interface FnbPulseProps {
   nextHref?: string
+  fullWalkthrough?: boolean
 }
 
-export default function FnbPulse({ nextHref = '#architecture' }: FnbPulseProps) {
+export default function FnbPulse({
+  nextHref = '#architecture',
+  fullWalkthrough = false,
+}: FnbPulseProps) {
   const [videoOpen, setVideoOpen] = useState(false)
 
   return (
-    <section
-      id="fnbpulse"
-      className="relative flex min-h-[calc(100dvh-var(--header-h,88px))] scroll-mt-[var(--header-h,88px)] flex-col justify-center border-y border-white/10 bg-base-900/40 px-6 py-16 lg:px-8"
-    >
+    <>
+      <section
+        id="fnbpulse"
+        className="relative flex min-h-[calc(100dvh-var(--header-h,88px))] scroll-mt-[var(--header-h,88px)] flex-col justify-center border-y border-white/10 bg-base-900/40 px-6 py-16 lg:px-8"
+      >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(47,111,255,0.14),transparent_50%)]"
@@ -100,10 +106,8 @@ export default function FnbPulse({ nextHref = '#architecture' }: FnbPulseProps) 
           </h2>
 
           <p className="text-lg leading-relaxed text-slate-400">
-            fnbPulse connects your POS (ex. Clover) and Accounting (ex. Xero)
-            system automatically, so you catch rising food costs and
-            shrinking margins before they show up on your P&amp;L. Built on
-            the LatentSchema engine.
+            fnbPulse is LatentSchema's flagship product — an AI-driven margin and operations platform for restaurants, 
+            built on the LatentSchema engine. Connects your POS (ex. Clover) and Accounting (ex. Xero) systems automatically, so you catch rising food costs and shrinking margins before they show up on your P&amp;L
           </p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row">
@@ -158,7 +162,10 @@ export default function FnbPulse({ nextHref = '#architecture' }: FnbPulseProps) 
         <FnbPulseExplainer />
       </Modal>
 
-      <ScrollCue to={nextHref} />
-    </section>
+        <ScrollCue to="#product" />
+      </section>
+
+      <ProductWalkthrough compact={!fullWalkthrough} nextHref={nextHref} />
+    </>
   )
 }

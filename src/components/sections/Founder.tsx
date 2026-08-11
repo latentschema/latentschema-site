@@ -1,6 +1,10 @@
 import ScrollCue from '../ui/ScrollCue'
 
-export default function Founder() {
+interface FounderProps {
+  nextHref?: string
+}
+
+export default function Founder({ nextHref = '#waitlist' }: FounderProps) {
   return (
     <section
       id="team"
@@ -147,7 +151,7 @@ export default function Founder() {
         </div>
       </div>
 
-      <ScrollCue to="#linkedin" />
+      <ScrollCue to={nextHref} />
     </section>
   )
 }

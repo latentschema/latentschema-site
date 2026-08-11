@@ -24,8 +24,8 @@ function App() {
         <EngineBridge />
         <FnbPulse />
         <Architecture />
-        <Resources />
-        <Founder />
+        <Resources nextHref="#team" />
+        <Founder nextHref="#linkedin" />
         <LinkedInFeed />
       </main>
       <Footer />

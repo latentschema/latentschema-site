@@ -1,9 +1,10 @@
 import Header from './components/layout/Header'
 import LogoMark from './components/ui/LogoMark'
-import FnbPulse from './components/sections/FnbPulse'
+import Resources from './components/sections/Resources'
+import LinkedInFeed from './components/sections/LinkedInFeed'
 import Footer from './components/sections/Footer'
 
-function FnbPulsePage() {
+function ResourcesPage() {
   return (
     <div className="min-h-screen bg-base-950">
       <div
@@ -14,11 +15,12 @@ function FnbPulsePage() {
       </div>
       <Header />
       <main>
-        <FnbPulse nextHref="#waitlist" fullWalkthrough />
+        <Resources />
+        <LinkedInFeed />
       </main>
       <Footer />
     </div>
   )
 }
 
-export default FnbPulsePage
+export default ResourcesPage
