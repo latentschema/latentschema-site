@@ -136,17 +136,21 @@ const FlipPage = forwardRef<HTMLDivElement, FlipPageProps>(function FlipPage(
         <img
           src={screen.src}
           alt={screen.title}
-          className="aspect-[16/10] w-full object-cover object-top"
+          className="aspect-[16/9] w-full object-cover object-top"
           draggable={false}
         />
       </div>
-      <div className="flex flex-1 flex-col gap-2 overflow-y-auto p-5">
-        <h3 className="text-base font-semibold text-slate-50">{screen.title}</h3>
-        <p className="text-sm leading-relaxed text-slate-400">{screen.description}</p>
+      <div className="flex flex-1 items-center gap-4 px-4 py-2.5">
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-sm font-semibold text-slate-50">{screen.title}</h3>
+          <p className="mt-0.5 line-clamp-1 text-xs leading-relaxed text-slate-400">
+            {screen.description}
+          </p>
+        </div>
         <button
           type="button"
           onClick={onViewFullSize}
-          className="mt-auto inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[#00E676]"
+          className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#00E676]"
         >
           View full size
           <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
@@ -243,7 +247,7 @@ export default function ProductWalkthrough({
         </div>
 
         <div className="relative mt-12 flex flex-col items-center">
-          <div className="relative flex w-full max-w-md items-center justify-center">
+          <div className="relative flex w-full max-w-4xl items-center justify-center">
             <button
               type="button"
               onClick={flipPrev}
@@ -263,13 +267,13 @@ export default function ProductWalkthrough({
 
             <FlipBook
               ref={bookRef}
-              width={380}
-              height={560}
+              width={780}
+              height={540}
               size="stretch"
-              minWidth={280}
-              maxWidth={400}
-              minHeight={460}
-              maxHeight={580}
+              minWidth={500}
+              maxWidth={780}
+              minHeight={380}
+              maxHeight={560}
               maxShadowOpacity={0.5}
               drawShadow
               showCover={false}
