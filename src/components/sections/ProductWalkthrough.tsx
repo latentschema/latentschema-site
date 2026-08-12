@@ -4,6 +4,12 @@ import ScrollCue from '../ui/ScrollCue'
 
 const SCREENS = [
   {
+    src: '/images/product/0-fnbpulse-score.png',
+    title: 'Pulse Score',
+    description:
+      'A single 0-100 health score combining food cost, labor cost, margin, and prime cost against warning and critical thresholds, with a weekly profit-leak chart flagging which days need attention.',
+  },
+  {
     src: '/images/product/1-fnbpulse-managers-cockpit.png',
     title: "Manager's Cockpit",
     description:
@@ -95,6 +101,12 @@ const SCREENS = [
     title: 'Labor Roster',
     description:
       'Weekly labor scheduling by role, cost, and shift, benchmarked against expected demand per branch.',
+  },
+  {
+    src: '/images/product/16-fnbpulse-branch-manager.png',
+    title: 'Branch Manager',
+    description:
+      'A single-branch daily view for on-site managers — that day\'s sales, scheduled shifts, and low-stock alerts, with one-tap actions to log inventory counts or create purchase orders.',
   },
 ]
 
