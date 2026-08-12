@@ -120,15 +120,78 @@ export default function ProductWalkthrough({
   compact = false,
 }: ProductWalkthroughProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [revealed, setRevealed] = useState<Set<string>>(new Set())
   const screens = compact ? SCREENS.filter((screen) => screen.highlight) : SCREENS
   const active = activeIndex !== null ? screens[activeIndex] : null
   const scrollerRef = useRef<HTMLDivElement>(null)
+  const cardElsRef = useRef<Map<string, HTMLElement>>(new Map())
+  const hasNudgedRef = useRef(false)
 
   function scrollByCard(direction: 1 | -1) {
     const scroller = scrollerRef.current
     if (!scroller) return
     scroller.scrollBy({ left: direction * scroller.clientWidth * 0.85, behavior: 'smooth' })
   }
+
+  function registerCard(src: string) {
+    return (el: HTMLElement | null) => {
+      if (el) cardElsRef.current.set(src, el)
+      else cardElsRef.current.delete(src)
+    }
+  }
+
+  // fade + slide each card in the first time it scrolls into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setRevealed((prev) => {
+          const next = new Set(prev)
+          let changed = false
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue
+            const src = (entry.target as HTMLElement).dataset.src
+            if (src && !next.has(src)) {
+              next.add(src)
+              changed = true
+              observer.unobserve(entry.target)
+            }
+          }
+          return changed ? next : prev
+        })
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -40px 0px' },
+    )
+
+    cardElsRef.current.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+    // card set is fixed per mount (compact doesn't change after render)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // one-time gentle nudge on the horizontal gallery to hint it scrolls
+  useEffect(() => {
+    const scroller = scrollerRef.current
+    if (!scroller || compact) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting || hasNudgedRef.current) return
+        hasNudgedRef.current = true
+        observer.disconnect()
+
+        window.setTimeout(() => {
+          scroller.scrollBy({ left: 160, behavior: 'smooth' })
+          window.setTimeout(() => {
+            scroller.scrollBy({ left: -160, behavior: 'smooth' })
+          }, 650)
+        }, 500)
+      },
+      { threshold: 0.4 },
+    )
+
+    observer.observe(scroller)
+    return () => observer.disconnect()
+  }, [compact])
 
   function showRelative(direction: 1 | -1) {
     setActiveIndex((current) => {
@@ -185,12 +248,19 @@ export default function ProductWalkthrough({
 
         {compact ? (
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {screens.map((screen) => (
+            {screens.map((screen, index) => (
               <button
                 key={screen.src}
+                ref={registerCard(screen.src)}
+                data-src={screen.src}
                 type="button"
                 onClick={() => setActiveIndex(screens.indexOf(screen))}
-                className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-300 hover:-translate-y-1 hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)]"
+                style={{ transitionDelay: `${(index % 3) * 90}ms` }}
+                className={`group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-700 ease-out hover:-translate-y-1 hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] ${
+                  revealed.has(screen.src)
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-8 opacity-0'
+                }`}
               >
                 <div className="overflow-hidden border-b border-white/10">
                   <img
@@ -227,12 +297,19 @@ export default function ProductWalkthrough({
               ref={scrollerRef}
               className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {screens.map((screen) => (
+              {screens.map((screen, index) => (
                 <button
                   key={screen.src}
+                  ref={registerCard(screen.src)}
+                  data-src={screen.src}
                   type="button"
                   onClick={() => setActiveIndex(screens.indexOf(screen))}
-                  className="group flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-300 hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] sm:w-[440px]"
+                  style={{ transitionDelay: `${(index % 3) * 90}ms` }}
+                  className={`group flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-700 ease-out hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] sm:w-[440px] ${
+                    revealed.has(screen.src)
+                      ? 'translate-y-0 opacity-100'
+                      : 'translate-y-8 opacity-0'
+                  }`}
                 >
                   <div className="overflow-hidden border-b border-white/10">
                     <img

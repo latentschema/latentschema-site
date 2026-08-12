@@ -21,8 +21,8 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <EngineBridge />
-        <FnbPulse />
+        <FnbPulse nextHref="#engine" />
+        <EngineBridge nextHref="#architecture" />
         <Architecture />
         <Resources nextHref="#team" />
         <Founder nextHref="#linkedin" />
