@@ -171,7 +171,7 @@ export default function ProductWalkthrough({
   // one-time gentle nudge on the horizontal gallery to hint it scrolls
   useEffect(() => {
     const scroller = scrollerRef.current
-    if (!scroller || compact) return
+    if (!scroller) return
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -191,7 +191,8 @@ export default function ProductWalkthrough({
 
     observer.observe(scroller)
     return () => observer.disconnect()
-  }, [compact])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function showRelative(direction: 1 | -1) {
     setActiveIndex((current) => {
@@ -246,8 +247,11 @@ export default function ProductWalkthrough({
           </p>
         </div>
 
-        {compact ? (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="relative mt-12">
+          <div
+            ref={scrollerRef}
+            className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
             {screens.map((screen, index) => (
               <button
                 key={screen.src}
@@ -256,7 +260,7 @@ export default function ProductWalkthrough({
                 type="button"
                 onClick={() => setActiveIndex(screens.indexOf(screen))}
                 style={{ transitionDelay: `${(index % 3) * 90}ms` }}
-                className={`group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-700 ease-out hover:-translate-y-1 hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] ${
+                className={`group flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-700 ease-out hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] sm:w-[440px] ${
                   revealed.has(screen.src)
                     ? 'translate-y-0 opacity-100'
                     : 'translate-y-8 opacity-0'
@@ -291,91 +295,41 @@ export default function ProductWalkthrough({
               </button>
             ))}
           </div>
-        ) : (
-          <div className="relative mt-12">
-            <div
-              ref={scrollerRef}
-              className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            >
-              {screens.map((screen, index) => (
-                <button
-                  key={screen.src}
-                  ref={registerCard(screen.src)}
-                  data-src={screen.src}
-                  type="button"
-                  onClick={() => setActiveIndex(screens.indexOf(screen))}
-                  style={{ transitionDelay: `${(index % 3) * 90}ms` }}
-                  className={`group flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900/60 text-left transition-all duration-700 ease-out hover:border-[#00E676]/40 hover:shadow-[0_0_24px_rgba(0,230,118,0.15)] sm:w-[440px] ${
-                    revealed.has(screen.src)
-                      ? 'translate-y-0 opacity-100'
-                      : 'translate-y-8 opacity-0'
-                  }`}
-                >
-                  <div className="overflow-hidden border-b border-white/10">
-                    <img
-                      src={screen.src}
-                      alt={screen.title}
-                      loading="lazy"
-                      className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col gap-2 p-5">
-                    <h3 className="text-base font-semibold text-slate-50">{screen.title}</h3>
-                    <p className="text-sm leading-relaxed text-slate-400">
-                      {screen.description}
-                    </p>
-                  </div>
-                  <span className="mx-5 mb-4 inline-flex w-fit items-center gap-1.5 text-xs font-semibold text-[#00E676]">
-                    View full size
-                    <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
-                      <path
-                        d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </button>
-              ))}
-            </div>
 
-            <button
-              type="button"
-              onClick={() => scrollByCard(-1)}
-              aria-label="Scroll left"
-              className="absolute left-0 top-1/2 hidden h-11 w-11 -translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/90 text-slate-300 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] lg:flex"
-            >
-              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                <path
-                  d="M15 6l-6 6 6 6"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+          <button
+            type="button"
+            onClick={() => scrollByCard(-1)}
+            aria-label="Scroll left"
+            className="absolute left-0 top-1/2 hidden h-11 w-11 -translate-x-4 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/90 text-slate-300 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] lg:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+              <path
+                d="M15 6l-6 6 6 6"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
 
-            <button
-              type="button"
-              onClick={() => scrollByCard(1)}
-              aria-label="Scroll right"
-              className="absolute right-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 translate-x-4 items-center justify-center rounded-full border border-white/15 bg-base-950/90 text-slate-300 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] lg:flex"
-            >
-              <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                <path
-                  d="M9 6l6 6-6 6"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
-        )}
+          <button
+            type="button"
+            onClick={() => scrollByCard(1)}
+            aria-label="Scroll right"
+            className="absolute right-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 translate-x-4 items-center justify-center rounded-full border border-white/15 bg-base-950/90 text-slate-300 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] lg:flex"
+          >
+            <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+              <path
+                d="M9 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
 
         {compact && (
           <div className="mt-10 text-center">
