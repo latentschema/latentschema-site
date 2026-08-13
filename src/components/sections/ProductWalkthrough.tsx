@@ -132,11 +132,11 @@ const FlipPage = forwardRef<HTMLDivElement, FlipPageProps>(function FlipPage(
       ref={ref}
       className="flex h-full flex-col overflow-hidden rounded-xl border border-white/10 bg-base-900 shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
     >
-      <div className="overflow-hidden border-b border-white/10">
+      <div className="aspect-[16/9] overflow-hidden border-b border-white/10 bg-white p-2">
         <img
           src={screen.src}
           alt={screen.title}
-          className="aspect-[16/9] w-full object-cover object-top"
+          className="h-full w-full object-contain"
           draggable={false}
         />
       </div>
