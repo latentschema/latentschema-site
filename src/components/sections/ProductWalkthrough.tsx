@@ -201,17 +201,36 @@ export default function ProductWalkthrough({
   }
 
   useEffect(() => {
-    if (activeIndex === null) return
-
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'ArrowRight') showRelative(1)
-      if (event.key === 'ArrowLeft') showRelative(-1)
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return
+      const direction = event.key === 'ArrowRight' ? 1 : -1
+
+      // lightbox open: navigate the zoomed view; otherwise flip the book
+      if (activeIndex !== null) {
+        showRelative(direction)
+      } else {
+        direction === 1 ? flipNext() : flipPrev()
+      }
     }
 
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIndex, screens.length])
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 640px)')
+    setIsMobile(query.matches)
+    const onChange = (event: MediaQueryListEvent) => setIsMobile(event.matches)
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+  }, [])
+
+  const bookSize = isMobile
+    ? { width: 320, height: 280, minWidth: 220, maxWidth: 340, minHeight: 200, maxHeight: 300 }
+    : { width: 780, height: 540, minWidth: 500, maxWidth: 780, minHeight: 380, maxHeight: 560 }
 
   return (
     <section
@@ -266,14 +285,15 @@ export default function ProductWalkthrough({
             </button>
 
             <FlipBook
+              key={isMobile ? 'mobile' : 'desktop'}
               ref={bookRef}
-              width={780}
-              height={540}
+              width={bookSize.width}
+              height={bookSize.height}
               size="stretch"
-              minWidth={500}
-              maxWidth={780}
-              minHeight={380}
-              maxHeight={560}
+              minWidth={bookSize.minWidth}
+              maxWidth={bookSize.maxWidth}
+              minHeight={bookSize.minHeight}
+              maxHeight={bookSize.maxHeight}
               maxShadowOpacity={0.5}
               drawShadow
               showCover={false}
