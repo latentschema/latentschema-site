@@ -1,6 +1,5 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import HTMLFlipBook from 'react-pageflip'
-import Modal from '../ui/Modal'
 import ScrollCue from '../ui/ScrollCue'
 
 // react-pageflip's TS types mark every StPageFlip setting as required, even
@@ -120,13 +119,9 @@ type Screen = (typeof SCREENS)[number]
 
 interface FlipPageProps {
   screen: Screen
-  onViewFullSize: () => void
 }
 
-const FlipPage = forwardRef<HTMLDivElement, FlipPageProps>(function FlipPage(
-  { screen, onViewFullSize },
-  ref,
-) {
+const FlipPage = forwardRef<HTMLDivElement, FlipPageProps>(function FlipPage({ screen }, ref) {
   return (
     <div
       ref={ref}
@@ -140,29 +135,11 @@ const FlipPage = forwardRef<HTMLDivElement, FlipPageProps>(function FlipPage(
           draggable={false}
         />
       </div>
-      <div className="flex flex-1 items-center gap-4 px-4 py-2.5">
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate text-sm font-semibold text-slate-50">{screen.title}</h3>
-          <p className="mt-0.5 line-clamp-1 text-xs leading-relaxed text-slate-400">
-            {screen.description}
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={onViewFullSize}
-          className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-[#00E676]"
-        >
-          View full size
-          <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
-            <path
-              d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
+      <div className="flex flex-1 flex-col gap-1.5 overflow-y-auto p-4">
+        <h3 className="text-sm font-semibold text-slate-50 sm:text-base">{screen.title}</h3>
+        <p className="text-xs leading-relaxed text-slate-400 sm:text-sm">
+          {screen.description}
+        </p>
       </div>
     </div>
   )
@@ -177,10 +154,8 @@ export default function ProductWalkthrough({
   nextHref,
   compact = false,
 }: ProductWalkthroughProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [currentPage, setCurrentPage] = useState(0)
   const screens = compact ? SCREENS.filter((screen) => screen.highlight) : SCREENS
-  const active = activeIndex !== null ? screens[activeIndex] : null
   const bookRef = useRef<{ pageFlip: () => { flipPrev: () => void; flipNext: () => void } }>(
     null,
   )
@@ -193,30 +168,16 @@ export default function ProductWalkthrough({
     bookRef.current?.pageFlip().flipNext()
   }
 
-  function showRelative(direction: 1 | -1) {
-    setActiveIndex((current) => {
-      if (current === null) return current
-      return (current + direction + screens.length) % screens.length
-    })
-  }
-
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return
-      const direction = event.key === 'ArrowRight' ? 1 : -1
-
-      // lightbox open: navigate the zoomed view; otherwise flip the book
-      if (activeIndex !== null) {
-        showRelative(direction)
-      } else {
-        direction === 1 ? flipNext() : flipPrev()
-      }
+      if (event.key === 'ArrowRight') flipNext()
+      if (event.key === 'ArrowLeft') flipPrev()
     }
 
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIndex, screens.length])
+  }, [])
 
   const [isMobile, setIsMobile] = useState(false)
 
@@ -229,8 +190,8 @@ export default function ProductWalkthrough({
   }, [])
 
   const bookSize = isMobile
-    ? { width: 320, height: 280, minWidth: 220, maxWidth: 340, minHeight: 200, maxHeight: 300 }
-    : { width: 780, height: 540, minWidth: 500, maxWidth: 780, minHeight: 380, maxHeight: 560 }
+    ? { width: 320, height: 330, minWidth: 220, maxWidth: 340, minHeight: 260, maxHeight: 370 }
+    : { width: 780, height: 580, minWidth: 500, maxWidth: 780, minHeight: 420, maxHeight: 620 }
 
   return (
     <section
@@ -306,12 +267,8 @@ export default function ProductWalkthrough({
               className="product-flipbook"
               onFlip={(event: { data: number }) => setCurrentPage(event.data)}
             >
-              {screens.map((screen, index) => (
-                <FlipPage
-                  key={screen.src}
-                  screen={screen}
-                  onViewFullSize={() => setActiveIndex(index)}
-                />
+              {screens.map((screen) => (
+                <FlipPage key={screen.src} screen={screen} />
               ))}
             </FlipBook>
 
@@ -358,68 +315,6 @@ export default function ProductWalkthrough({
           </div>
         )}
       </div>
-
-      <Modal open={active !== null} onClose={() => setActiveIndex(null)}>
-        {active && activeIndex !== null && (
-          <div className="flex flex-col gap-4">
-            <div className="relative">
-              <img src={active.src} alt={active.title} className="w-full rounded-lg" />
-
-              {screens.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => showRelative(-1)}
-                    aria-label="Previous screenshot"
-                    className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/80 text-slate-200 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] sm:left-3"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <path
-                        d="M15 6l-6 6 6 6"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => showRelative(1)}
-                    aria-label="Next screenshot"
-                    className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-base-950/80 text-slate-200 backdrop-blur transition-colors hover:border-[#00E676]/50 hover:text-[#00E676] sm:right-3"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
-                      <path
-                        d="M9 6l6 6-6 6"
-                        stroke="currentColor"
-                        strokeWidth="1.75"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </>
-              )}
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="text-lg font-semibold text-slate-50">{active.title}</h3>
-                {screens.length > 1 && (
-                  <span className="shrink-0 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
-                    {activeIndex + 1} / {screens.length}
-                  </span>
-                )}
-              </div>
-              <p className="mt-1 text-sm leading-relaxed text-slate-400">
-                {active.description}
-              </p>
-            </div>
-          </div>
-        )}
-      </Modal>
 
       {nextHref && <ScrollCue to={nextHref} />}
     </section>
