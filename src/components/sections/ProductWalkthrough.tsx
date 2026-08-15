@@ -9,6 +9,13 @@ const FlipBook = HTMLFlipBook as unknown as React.ComponentType<Record<string, u
 
 const SCREENS = [
   {
+    src: '/images/product/0-fnbpulse-askpulse.png',
+    title: 'Ask Pulse',
+    description:
+      'A conversational AI assistant that answers plain-English questions about costs, sales, and margins with live charts and figures pulled straight from your data, not estimates.',
+    highlight: true,
+  },
+  {
     src: '/images/product/0-fnbpulse-score.png',
     title: 'Pulse Score',
     description:
