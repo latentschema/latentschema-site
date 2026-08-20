@@ -72,7 +72,7 @@ const SCREENS = [
       'Purchase history across suppliers and branches, reconciled invoice-by-invoice with subtotal, tax, and total.',
   },
   {
-    src: '/images/product/9-fnbpulse-invoice.jpg',
+    src: '/images/product/9-fnbpulse-invoice.png',
     title: 'Invoice Processing',
     description:
       'OCR and AI-based invoice coding: scanned supplier invoices are read automatically and matched line-by-line to ingredients, updating inventory quantities and cost with no manual entry.',
