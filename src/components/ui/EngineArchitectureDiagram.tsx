@@ -24,7 +24,7 @@ export default function EngineArchitectureDiagram() {
 
         <g transform="translate(30, 40)">
           <text x="0" y="0" fill="#f0f4f8" fontSize="20" fontWeight="700" letterSpacing="1">
-            LATENTSCHEMA™ SLM ARCHITECTURE
+            LATENTPULSE™ SLM ARCHITECTURE
           </text>
           <text x="0" y="22" fill="#8a99ad" fontSize="12">
             Optimized On-Device &amp; Compressed Language Model Pipeline
@@ -34,7 +34,7 @@ export default function EngineArchitectureDiagram() {
             <rect x="0" y="0" width="160" height="36" rx="6" fill="#151c2e" stroke="#2a3656" />
             <circle cx="20" cy="18" r="6" fill="url(#primaryGrad)" className="engine-diagram-pulse" />
             <text x="34" y="22" fill="#ffffff" fontSize="12" fontWeight="600">
-              Latent Schema
+              LatentPulse
             </text>
           </g>
         </g>
@@ -175,7 +175,7 @@ export default function EngineArchitectureDiagram() {
         <g transform="translate(30, 360)">
           <line x1="0" y1="0" x2="940" y2="0" stroke="#2a3656" strokeWidth="1" />
           <text x="0" y="20" fill="#8a99ad" fontSize="10">
-            © LatentSchema. All rights reserved. Confidential &amp; Proprietary Architectural Specification.
+            © LatentSchema. All rights reserved. LatentPulse Architectural Specification — Proprietary to LatentSchema.
           </text>
           <text x="940" y="20" fill="#4facfe" fontSize="10" textAnchor="end">
             https://latentschema.com

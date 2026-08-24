@@ -13,7 +13,7 @@ export interface Env {
 const RESOURCES: Record<string, { file: string; title: string }> = {
   'latentschema-whitepaper': {
     file: 'latentschema-whitepaper.html',
-    title: 'LatentSchema Technical Whitepaper',
+    title: 'LatentPulse Technical Whitepaper',
   },
   'fnbpulse-whitepaper': {
     file: 'fnbpulse-whitepaper.html',

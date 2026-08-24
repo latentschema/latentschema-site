@@ -3,7 +3,7 @@ import WhitepaperGate from '../ui/WhitepaperGate'
 
 const WHITEPAPERS = [
   {
-    title: 'LatentSchema Technical Whitepaper',
+    title: 'LatentPulse Technical Whitepaper',
     description:
       'How our sub-3B parameter Small Language Models replace fragile prompt wrappers with proprietary, transaction-native intelligence.',
     href: 'latentschema-whitepaper.html',
@@ -36,7 +36,7 @@ export default function Resources({ nextHref = '#linkedin' }: ResourcesProps) {
             <span className="text-gradient-cobalt">Clients &amp; Investors</span>
           </h2>
           <p className="text-lg leading-relaxed text-slate-400">
-            Deep-dive documentation on the LatentSchema engine and the
+            Deep-dive documentation on LatentPulse and the
             products we're building on top of it.
           </p>
         </div>

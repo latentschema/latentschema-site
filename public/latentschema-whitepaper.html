@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="LatentSchema whitepaper — the foundational intelligence layer for fragmented enterprise data.">
+<meta name="description" content="LatentPulse whitepaper — the intelligence layer for fragmented enterprise data.">
 <title>LatentSchema — Whitepaper</title>
 <style>
   :root{
@@ -186,11 +186,11 @@
     </svg>
     <span class="ls-word" style="font-size:28px;"><span class="a">LATENT</span><span class="b">SCHEMA</span></span>
   </div>
-  <p class="eyebrow"><span class="dot"></span>Whitepaper · LatentSchema</p>
-  <h1 class="title">The Foundational <span class="grad">Intelligence Layer</span> for Fragmented Enterprise Data</h1>
-  <p class="subtitle">LatentSchema synthesizes disparate, legacy datasets into low-compute, domain-specific machine intelligence. We eliminate complex database migrations to deliver autonomous business intelligence at scale.</p>
+  <p class="eyebrow"><span class="dot"></span>Whitepaper · LatentPulse</p>
+  <h1 class="title">LatentPulse: The <span class="grad">Intelligence Layer</span> for Fragmented Enterprise Data</h1>
+  <p class="subtitle">LatentPulse synthesizes disparate, legacy datasets into low-compute, domain-specific machine intelligence, eliminating complex database migrations to deliver autonomous business intelligence at scale.</p>
   <div class="meta-row">
-    <span><b>Product</b> LatentSchema Core Engine</span>
+    <span><b>Product</b> LatentPulse Engine</span>
     <span><b>Prepared</b> July 2026</span>
     <span><b>Audience</b> Engineering leaders, investors, data partners</span>
   </div>
@@ -204,7 +204,7 @@
   <p class="kicker">Executive Summary</p>
   <h2>Fragmentation is the default state of enterprise data</h2>
   <p class="lede">Every operating business accumulates the same problem: transactional truth scattered across a POS system, an accounting ledger, a spreadsheet, a supplier portal, and a handful of tools that were never designed to talk to each other. The conventional fix — a data warehouse, a schema migration, a team of analytics engineers — is slow, expensive, and often abandoned halfway through.</p>
-  <p>LatentSchema takes a different position: instead of forcing fragmented, legacy datasets into a unified schema before any intelligence can be extracted, we train small, domain-specific models that read the data where it already lives. The result is autonomous business intelligence that arrives in weeks, runs on modest compute, and never requires the underlying systems of record to change.</p>
+  <p>LatentPulse takes a different approach: instead of forcing fragmented, legacy datasets into a unified schema before any intelligence can be extracted, we train small, domain-specific models that read the data where it already lives. The result is autonomous business intelligence that arrives in weeks, runs on modest compute, and never requires the underlying systems of record to change.</p>
 </section>
 
 <div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
@@ -212,7 +212,7 @@
 <section>
   <p class="kicker">Architecture</p>
   <h2>Moving Past API Wrappers</h2>
-  <p>While others build fragile prompt wrappers around generic models, LatentSchema is training custom, low-compute sub-3B parameter Small Language Models (SLMs). By engineering proprietary tokenization spaces for unstructured transactional metrics, we deliver localized data privacy, ultra-low latency, and mathematically predictable operational insights.</p>
+  <p>While others build fragile prompt wrappers around generic models, LatentSchema is training LatentPulse — a custom, low-compute, sub-3B parameter Small Language Model (SLM) architecture. By engineering proprietary tokenization spaces for unstructured transactional metrics, we deliver localized data privacy, ultra-low latency, and mathematically predictable operational insights.</p>
 
   <div class="spec-grid">
     <div class="spec"><div class="l">Model class</div><div class="v">Sub-3B parameter SLMs</div></div>
@@ -268,7 +268,7 @@
         <tr>
           <th>Dimension</th>
           <th>Generic LLM + prompt wrapper</th>
-          <th>LatentSchema SLM</th>
+          <th>LatentPulse</th>
         </tr>
       </thead>
       <tbody>
@@ -309,7 +309,7 @@
   <p class="kicker">Eliminating the Migration Tax</p>
   <h2>Intelligence without re-platforming</h2>
   <p>The standard path to "data-driven" starts with a migration: normalize every source system into a common schema, stand up a warehouse, build the pipelines, then finally start modeling. For a business running lean, that project routinely outlives the problem it was meant to solve.</p>
-  <p>LatentSchema's engine is built to read fragmented, legacy datasets directly — the export from a POS system, a CSV from an accounting tool, a supplier's invoice format — without first collapsing them into one canonical schema. The model does the work of reconciling meaning across sources, which is where a schema migration project spends most of its budget in the first place.</p>
+  <p>LatentPulse is built to read fragmented, legacy datasets directly — the export from a POS system, a CSV from an accounting tool, a supplier's invoice format — without first collapsing them into one canonical schema. The model does the work of reconciling meaning across sources, which is where a schema migration project spends most of its budget in the first place.</p>
   <div class="callout">
     <p>The database migration isn't a prerequisite for intelligence. It's a workaround for models too general to read the data as it already exists.</p>
   </div>
@@ -320,16 +320,16 @@
 <section>
   <p class="kicker">Proof Point</p>
   <h2>fnbPulse — the engine in production</h2>
-  <p>LatentSchema's first commercial deployment is fnbPulse, an autonomous business intelligence product for multi-unit hospitality operators. It reconciles data between Clover POS systems and Xero accounting records automatically, then runs an AI Margin Advisor on top to surface ingredient cost anomalies, supplier price spikes, and labor variance — with a daily Pulse Score summarizing overall operational health.</p>
-  <p>Every one of those capabilities is downstream of the same core engine described in this document: fragmented source data in, structured operational intelligence out, without a migration in between.</p>
+  <p>LatentPulse's first production deployment is fnbPulse, an autonomous business intelligence product for multi-unit hospitality operators. It reconciles data between Clover POS systems and Xero accounting records automatically, then runs an AI Margin Advisor on top to surface ingredient cost anomalies, supplier price spikes, and labor variance — with a daily Pulse Score summarizing overall operational health.</p>
+  <p>Every one of those capabilities is downstream of the same LatentPulse engine described in this document: fragmented source data in, structured operational intelligence out, without a migration in between.</p>
 </section>
 
 <div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
 
 <section>
   <p class="kicker">Status</p>
-  <h2>Where LatentSchema is today</h2>
-  <p>LatentSchema is currently in alpha, engineering the core tokenization and model training pipeline alongside its first production deployment in the hospitality vertical. We are onboarding a limited set of design partners who have the kind of fragmented, legacy transactional data this engine was built to read.</p>
+  <h2>Where LatentPulse is today</h2>
+  <p>LatentPulse is currently in alpha, engineering the core tokenization and model training pipeline alongside its first production deployment in the hospitality vertical. We are onboarding a limited set of design partners who have the kind of fragmented, legacy transactional data this engine was built to read.</p>
 </section>
 
 </div>

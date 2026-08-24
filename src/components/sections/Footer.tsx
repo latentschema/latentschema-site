@@ -44,7 +44,7 @@ export default function Footer() {
         </h2>
         <p className="mt-3 text-slate-400">
           See what fnbPulse can do for your business, or talk to us about
-          building on the LatentSchema engine together.
+          building on LatentPulse together.
         </p>
 
         {submitted ? (

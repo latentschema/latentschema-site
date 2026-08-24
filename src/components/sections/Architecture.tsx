@@ -31,11 +31,12 @@ export default function Architecture({
           </h2>
           <p className="text-lg leading-relaxed text-slate-400">
             While others build fragile prompt wrappers around generic models,
-            LatentSchema is training custom, low-compute sub-3B parameter Small
-            Language Models (SLMs). By engineering proprietary tokenization
-            spaces for unstructured transactional metrics, we deliver localized
-            data privacy, ultra-low latency, and mathematically predictable
-            operational insights.
+            LatentSchema is training LatentPulse — a custom, low-compute,
+            sub-3B parameter Small Language Model (SLM) architecture. By
+            engineering proprietary tokenization spaces for unstructured
+            transactional metrics, we deliver localized data privacy,
+            ultra-low latency, and mathematically predictable operational
+            insights.
           </p>
         </div>
 

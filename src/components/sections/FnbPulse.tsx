@@ -107,7 +107,7 @@ export default function FnbPulse({
 
           <p className="text-lg leading-relaxed text-slate-400">
             fnbPulse is LatentSchema's flagship product — an AI-driven margin and operations platform for restaurants, 
-            built on the LatentSchema engine. Connects your POS (ex. Clover) and Accounting (ex. Xero) systems automatically, so you catch rising food costs and shrinking margins before they show up on your P&amp;L
+            built on LatentPulse. Connects your POS (ex. Clover) and Accounting (ex. Xero) systems automatically, so you catch rising food costs and shrinking margins before they show up on your P&amp;L
           </p>
 
           <div className="mt-4 flex flex-col gap-4 sm:flex-row">

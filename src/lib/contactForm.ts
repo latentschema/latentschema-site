@@ -4,14 +4,14 @@ export const inputStyles =
 export const intentOptions = [
   'Trying fnbPulse for my restaurant',
   'Investing / partnership',
-  'Building on the LatentSchema engine',
+  'Building on LatentPulse',
   'Something else',
 ]
 
 export const intentCtaLabels: Record<string, string> = {
   'Trying fnbPulse for my restaurant': 'Request Demo',
   'Investing / partnership': 'Get in Touch',
-  'Building on the LatentSchema engine': 'Start the Conversation',
+  'Building on LatentPulse': 'Start the Conversation',
 }
 
 export const countryCodes = [

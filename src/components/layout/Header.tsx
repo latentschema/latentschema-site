@@ -131,7 +131,7 @@ export default function Header() {
               >
                 <span>
                   <span className="block text-sm font-semibold text-slate-100 group-hover/item:text-cobalt-bright">
-                    LatentSchema Engine
+                    LatentPulse - Engine
                   </span>
                   <span className="mt-0.5 block text-xs text-white">
                     The platform / core technology
@@ -221,7 +221,7 @@ export default function Header() {
               onClick={() => setMobileOpen(false)}
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-cobalt-bright"
             >
-              LatentSchema Engine
+              LatentPulse - Engine
             </a>
 
             <a

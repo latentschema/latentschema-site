@@ -30,15 +30,15 @@ export default function Hero() {
         </span>
 
         <h1 className="text-4xl font-extrabold tracking-tight text-slate-50 sm:text-5xl lg:text-6xl">
-          The Foundational{' '}
+          The {' '}
           <span className="text-gradient-cobalt">Intelligence Layer</span> for
           Fragmented Enterprise Data
         </h1>
 
         <p className="max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl">
-          LatentSchema turns your scattered, legacy systems into real-time
-          business intelligence — no database migration, no rip-and-replace.
-          One engine, built to plug into the tools you already run.
+          LatentSchema turns your scattered, legacy systems into real-time 
+          business intelligence — no database migration, no rip-and-replace. 
+          LatentPulse, our core engine, is built to plug into the tools you already run.
         </p>
 
         <div className="mt-4 flex flex-col gap-4 sm:flex-row">
@@ -47,7 +47,7 @@ export default function Hero() {
               Contact Us
             </Button>
           </a>
-          <WhitepaperGate title="LatentSchema Technical Whitepaper" href="latentschema-whitepaper.html">
+          <WhitepaperGate title="LatentPulse Technical Whitepaper" href="latentschema-whitepaper.html">
             {(openGate) => (
               <Button variant="secondary" className="w-full sm:w-auto" onClick={openGate}>
                 Read Technical Whitepaper

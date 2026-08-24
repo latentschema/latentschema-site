@@ -20,9 +20,9 @@ export default function EngineBridge({ nextHref = '#fnbpulse' }: EngineBridgePro
             One Engine, <span className="text-gradient-cobalt">Built to Generalize</span>
           </h2>
           <p className="text-lg leading-relaxed text-slate-400">
-            LatentSchema is the underlying engine: small, domain-specific
+            LatentPulse is the underlying engine: small, domain-specific
             models trained on your own data, no migration required.
-            fnbPulse is its first deployment — proof it extends into other
+            fnbPulse is its first deployment — built to extend into other
             transaction-heavy verticals.
           </p>
         </div>
