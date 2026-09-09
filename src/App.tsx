@@ -3,6 +3,7 @@ import LogoMark from './components/ui/LogoMark'
 import Hero from './components/sections/Hero'
 import EngineBridge from './components/sections/EngineBridge'
 import FnbPulse from './components/sections/FnbPulse'
+import Hanker from './components/sections/Hanker'
 import Architecture from './components/sections/Architecture'
 import Resources from './components/sections/Resources'
 import Founder from './components/sections/Founder'
@@ -21,7 +22,8 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <FnbPulse nextHref="#engine" />
+        <FnbPulse nextHref="#hanker" showWalkthrough={false} />
+        <Hanker nextHref="#engine" />
         <EngineBridge nextHref="#architecture" />
         <Architecture />
         <Resources nextHref="#team" />

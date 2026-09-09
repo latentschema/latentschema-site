@@ -21,6 +21,10 @@
     @apply bg-gradient-to-r from-[#00E676] to-emerald-300 bg-clip-text text-transparent;
   }
 
+  .text-gradient-amber {
+    @apply bg-gradient-to-r from-[#B47828] to-[#e0ab5c] bg-clip-text text-transparent;
+  }
+
   .panel {
     @apply border border-white/10 bg-white/[0.02] backdrop-blur-sm;
   }

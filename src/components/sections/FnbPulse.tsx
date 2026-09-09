@@ -62,11 +62,13 @@ const FEATURES = [
 interface FnbPulseProps {
   nextHref?: string
   fullWalkthrough?: boolean
+  showWalkthrough?: boolean
 }
 
 export default function FnbPulse({
   nextHref = '#architecture',
   fullWalkthrough = false,
+  showWalkthrough = true,
 }: FnbPulseProps) {
   const [videoOpen, setVideoOpen] = useState(false)
 
@@ -162,10 +164,10 @@ export default function FnbPulse({
         <FnbPulseExplainer />
       </Modal>
 
-        <ScrollCue to="#product" />
+        <ScrollCue to={showWalkthrough ? '#product' : nextHref} />
       </section>
 
-      <ProductWalkthrough compact={!fullWalkthrough} nextHref={nextHref} />
+      {showWalkthrough && <ProductWalkthrough compact={!fullWalkthrough} nextHref={nextHref} />}
     </>
   )
 }

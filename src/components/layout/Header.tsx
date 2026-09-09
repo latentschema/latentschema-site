@@ -106,13 +106,41 @@ export default function Header() {
                     fnbPulse
                   </span>
                   <span className="mt-0.5 block text-xs text-white">
-                    Product for Hospitality Industry
+                    Product for Hospitality Intelligence
                   </span>
                 </span>
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   className="h-4 w-4 shrink-0 text-slate-500 transition-all group-hover/item:translate-x-0.5 group-hover/item:text-[#00E676]"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H9M17 7v8"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="/hanker.html"
+                onClick={() => setProductsOpen(false)}
+                className="group/item flex items-center justify-between gap-3 rounded-lg px-3.5 py-3 transition-colors hover:bg-[#B47828]/10"
+              >
+                <span>
+                  <span className="block text-sm font-semibold text-slate-100 group-hover/item:text-[#B47828]">
+                    Hanker
+                  </span>
+                  <span className="mt-0.5 block text-xs text-white">
+                    Product for Hospitality Operations
+                  </span>
+                </span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="h-4 w-4 shrink-0 text-slate-500 transition-all group-hover/item:translate-x-0.5 group-hover/item:text-[#B47828]"
                 >
                   <path
                     d="M7 17L17 7M17 7H9M17 7v8"
@@ -214,6 +242,14 @@ export default function Header() {
               className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-[#00E676]/10 hover:text-[#00E676]"
             >
               fnbPulse
+            </a>
+
+            <a
+              href="/hanker.html"
+              onClick={() => setMobileOpen(false)}
+              className="rounded-lg px-3.5 py-3 text-sm font-medium text-slate-200 transition-colors hover:bg-[#B47828]/10 hover:text-[#B47828]"
+            >
+              Hanker
             </a>
 
             <a
