@@ -4,7 +4,6 @@ import ScrollCue from '../ui/ScrollCue'
 import FeatureCard from './FeatureCard'
 
 const AMBER = '#B47828'
-const CONTACT_HREF = 'mailto:contact@fnbpulse.com?subject=Hanker%20for%20my%20kitchen'
 // TODO: swap to https://hanker.food once production is live
 const HANKER_SITE_HREF = 'https://staging.hanker.food/'
 
@@ -116,7 +115,7 @@ export default function Hanker({ nextHref = '#waitlist' }: HankerProps) {
             </a>
 
             <a
-              href={CONTACT_HREF}
+              href="#waitlist"
               className="inline-flex items-center justify-center gap-2 rounded-md border px-6 py-3 text-sm font-semibold tracking-tight text-base-950 shadow-[0_0_24px_rgba(180,120,40,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-base-950"
               style={{ borderColor: `${AMBER}99`, backgroundColor: AMBER }}
             >
