@@ -16,6 +16,11 @@ export default function EngineBridge({ nextHref = '#fnbpulse' }: EngineBridgePro
           <span className="inline-flex items-center gap-2 rounded-full border border-cobalt-bright/30 bg-cobalt-bright/5 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-cobalt-bright">
             The Engine
           </span>
+          <img
+            src="/brand/logo/latentpulse-lockup-animated.svg"
+            alt="LatentPulse"
+            className="mt-4 h-24 w-auto sm:h-28"
+          />
           <h2 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-5xl">
             One Engine, <span className="text-gradient-cobalt">Built to Generalize</span>
           </h2>
